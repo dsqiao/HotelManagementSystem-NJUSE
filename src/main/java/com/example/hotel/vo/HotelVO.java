@@ -14,11 +14,30 @@ public class HotelVO {
     private String bizRegion;
     private String hotelStar;
     private Double rate;
+    private int evaluatePeople;
     private String description;
     private String phoneNum;
     private Integer managerId;
 
     private List<RoomVO> rooms;
+
+    public int getEvaluatePeople() {
+        return evaluatePeople;
+    }
+
+    public void setEvaluatePeople(int evaluatePeople) {
+        this.evaluatePeople = evaluatePeople;
+    }
+
+    public List<EvaluationVO> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(List<EvaluationVO> evaluations) {
+        this.evaluations = evaluations;
+    }
+
+    private List<EvaluationVO> evaluations;
 
     public Integer getId() {
         return id;
@@ -35,6 +54,7 @@ public class HotelVO {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getAddress() {
         return address;
@@ -100,3 +120,4 @@ public class HotelVO {
         this.managerId = managerId;
     }
 }
+

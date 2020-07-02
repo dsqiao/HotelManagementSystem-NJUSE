@@ -25,6 +25,11 @@ const routes = [
         component: () => import('@/views/hotel/hotelList')
       },
       {
+        path: '/hotel/searchHotels',
+        name: 'searchHotels',
+        component: () => import('@/views/hotel/searchHotels')
+      },
+      {
         path: '/hotel/hotelDetail/:hotelId',
         name: 'hotelDetail',
         component: () => import('@/views/hotel/hotelDetail')
@@ -43,6 +48,16 @@ const routes = [
         path: '/admin/manageUser',
         name: 'manageUser',
         component: () => import('@/views/admin/manageUser')
+      },
+      {
+        path: '/salesman/creditRecharge',
+        name: 'creditRecharge',
+        component: () => import('@/views/salesman/creditRecharge')
+      },
+      {
+        path: '/salesman/websiteDiscount',
+        name: 'websiteDiscount',
+        component: () => import('@/views/salesman/websiteDiscount')
       },
     ]
   },

@@ -1,15 +1,22 @@
 package com.example.hotel.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class TimeCouponVO extends CouponVO {
+
+    private Integer hotelId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
+
 
     //自行决定是打折还是直接减金额 如果选择打折就把targetMoney变为负数 否则就把discount变为负数
 
     private double discount;
-    private Integer targetMoney;
+    private Integer discountMoney;
 
     public LocalDateTime getEndTime() {
         return endTime;
@@ -35,11 +42,19 @@ public class TimeCouponVO extends CouponVO {
         this.discount = discount;
     }
 
-    public Integer getTargetMoney() {
-        return targetMoney;
+    public Integer getDiscountMoney() {
+        return discountMoney;
     }
 
-    public void setTargetMoney(Integer targetMoney) {
-        this.targetMoney = targetMoney;
+    public void setDiscountMoney(Integer targetMoney) {
+        this.discountMoney = targetMoney;
+    }
+
+    public Integer getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelid(Integer hotelid) {
+        this.hotelId = hotelid;
     }
 }

@@ -8,27 +8,31 @@ import {
     registerAPI,
     getUserInfoAPI,
     updateUserInfoAPI,
+    beMemberAPI,
 } from '@/api/user'
 
 import {
     getUserOrdersAPI,
     cancelOrderAPI,
+    updateOverTimeOrdersAPI
 } from '@/api/order'
 
-const getDefaultState = () => {
-    return {
+
+const user = {
+    state : {
         userId: '',
         userInfo: {
 
         },
         userOrderList: [
 
-        ]
-    }
-}
+        ],
+        getMembershipModalVisible: false,
+        orderDetailModalVisible: false,
+        currentOrder: {
 
-const user = {
-    state : getDefaultState(),
+        },
+    },
 
     mutations: {
         reset_state: function(state) {
@@ -56,17 +60,29 @@ const user = {
         },
         set_userOrderList: (state, data) => {
             state.userOrderList = data
+        },
+        set_getMembershipModalVisible: function (state, data) {
+            state.getMembershipModalVisible = data;
+        },
+        set_orderDetailModalVisible: function (state, data) {
+            state.orderDetailModalVisible = data;
+        },
+        set_currentOrder: function (state, data) {
+            state.currentOrder = data;
         }
     },
 
     actions: {
-        login: async ({ dispatch, commit }, userData) => {
+        login: async ({state, dispatch, commit }, userData) => {
             const res = await loginAPI(userData)
             if(res){
                 setToken(res.id)
                 commit('set_userId', res.id)
                 dispatch('getUserInfo')
-                router.push('/hotel/hotelList')
+                if(res.userType=='Client') router.push('/hotel/hotelList')
+                else if(res.userType=='HotelManager') router.push('/hotelManager/manageHotel')
+                else if(res.userType=='Salesman') router.push('/salesman/creditRecharge')
+                else if(res.userType=='Admin') router.push('/admin/manageUser')
             }
         },
         register: async({ commit }, data) => {
@@ -101,6 +117,17 @@ const user = {
                 dispatch('getUserInfo')
             }
         },
+        beMember: async ({state, commit}, data) => {
+            const params = {
+                id: state.userId,
+                ...data,
+            };
+            const res = await beMemberAPI(params);
+            if (res) {
+                message.success("注册成功");
+                commit('set_getMembershipModalVisible', false)
+            }
+        },
         getUserOrders: async({ state, commit }) => {
             const data = {
                 userId: Number(state.userId)
@@ -133,6 +160,13 @@ const user = {
                 resolve()
             })
         },
+        updateUserOverTimeOrders:async({commit,state,dispatch},userId)=>{
+            const res=await updateOverTimeOrdersAPI(userId)
+            console.log(res)
+            if(res){
+                commit('set_userOrderList',res)
+            }
+        }
     }
 }
 

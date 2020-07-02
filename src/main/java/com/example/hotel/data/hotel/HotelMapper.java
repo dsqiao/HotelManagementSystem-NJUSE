@@ -1,5 +1,6 @@
 package com.example.hotel.data.hotel;
 
+import com.example.hotel.enums.BizRegion;
 import com.example.hotel.po.Hotel;
 import com.example.hotel.vo.HotelVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,4 +18,13 @@ public interface HotelMapper {
     List<HotelVO> selectAllHotel();
 
     HotelVO selectById(@Param("id") Integer id);
+
+    int deleteById(@Param("id") Integer id);
+
+    List<HotelVO> selectOrderedHotel(@Param("userId") Integer userId);
+
+    List<HotelVO> selectManagedHotel(@Param("managerId") Integer managerId);
+
+    int updateRate(@Param("id") Integer id,@Param("evaluatePeople") Integer evaluatePeople,@Param("rate") double rate);
+
 }

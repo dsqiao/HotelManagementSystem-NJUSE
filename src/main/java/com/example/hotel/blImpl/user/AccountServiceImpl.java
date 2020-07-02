@@ -1,5 +1,6 @@
 package com.example.hotel.blImpl.user;
 
+import com.example.hotel.bl.credit.CreditService;
 import com.example.hotel.bl.user.AccountService;
 import com.example.hotel.data.user.AccountMapper;
 import com.example.hotel.po.User;
@@ -18,17 +19,24 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+    @Autowired
+    private CreditService creditService;
+
+
     @Override
     public ResponseVO registerAccount(UserVO userVO) {
         User user = new User();
         BeanUtils.copyProperties(userVO,user);
         try {
             accountMapper.createNewAccount(user);
+            if(user.getUserType().equals("Client")){
+                creditService.updateCredit(user.getId(),"初始化",100,0);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(ACCOUNT_EXIST);
         }
-        return ResponseVO.buildSuccess();
+        return ResponseVO.buildSuccess(true);
     }
 
     @Override
@@ -50,12 +58,23 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseVO updateUserInfo(int id, String password, String username, String phonenumber) {
+    public ResponseVO updateUserInfo(int id, String password, String username, String email, String phonenumber) {
         try {
-            accountMapper.updateAccount(id, password, username, phonenumber);
+            accountMapper.updateAccount(id, password, username, email, phonenumber);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure(UPDATE_ERROR);
+        }
+        return ResponseVO.buildSuccess(true);
+    }
+
+    @Override
+    public ResponseVO beMember(int id, String memberType, String birthday, String companyName) {
+        try {
+            accountMapper.beMember(id, memberType, birthday, companyName);
+        } catch (Exception e) {
+            System.out.println((e.getMessage()));
+            return ResponseVO.buildFailure("注册失败");
         }
         return ResponseVO.buildSuccess(true);
     }

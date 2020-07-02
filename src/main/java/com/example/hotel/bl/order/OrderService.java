@@ -39,4 +39,40 @@ public interface OrderService {
      */
     ResponseVO annulOrder(int orderid);
 
+
+    /**
+     * 查看酒店的所有订单
+     * @param hotelId
+     * @return
+     */
+    List<Order> getHotelOrders(Integer hotelId);
+
+    /**
+     * 查看属于该管理员的所有订单
+     * @param managerId
+     * @return
+     */
+    List<Order> getManagedOrders(int managerId);
+
+    /**
+     * 执行订单
+     * @param orderId
+     * @return
+     */
+    ResponseVO executeOrder(int orderId);
+
+    /**
+     * 检查订单是否超过最晚执行时间发生异常
+     * @param userId
+     * @param type
+     * @return
+     */
+    List<Order> updateOverTimeOrders(int userId,String type);
+
+    /**
+     * 退房
+     * @param orderId
+     * @return
+     */
+    ResponseVO checkOutOrder(int orderId);
 }

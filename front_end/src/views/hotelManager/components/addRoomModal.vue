@@ -17,6 +17,7 @@
                   <a-select-option value="BigBed">大床房</a-select-option>
                   <a-select-option value="DoubleBed">双床房</a-select-option>
                   <a-select-option value="Family">家庭房</a-select-option>
+                  <a-select-option value="PresidentBed">总统套房</a-select-option>
                 </a-select>
             </a-form-item>
             <a-form-item label="房间数量" v-bind="formItemLayout">
@@ -55,15 +56,14 @@ export default {
     computed: {
         ...mapGetters([
             'addRoomModalVisible',
-            'activeHotelId'
+            'activeHotelId',
+            'addRoomParams'
         ])
     },
     beforeCreate() {
         this.form = this.$form.createForm(this, { name: 'addRoomModal' });
     },
-    mounted() {
-
-    },
+    
     methods: {
         ...mapMutations([
             'set_addRoomModalVisible',

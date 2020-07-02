@@ -103,7 +103,7 @@
             </a-form-item>
             <a-divider></a-divider>
             <h2 v-if="orderMatchCouponList.length>0">优惠</h2>
-            <a-checkbox-group v-model="checkedList" @change="onchange">
+            <a-radio-group v-model="checkedList" @change="onchange">
                 <a-table
                     :columns="columns"
                     :dataSource="orderMatchCouponList"
@@ -111,14 +111,15 @@
                     bordered
                     v-if="orderMatchCouponList.length>0"
                 >
-                    <a-checkbox
+                    <a-radio
                         slot="id"
                         slot-scope="record"
                         :value="record"
                     >
-                    </a-checkbox>
+
+                    </a-radio>
                 </a-table>
-            </a-checkbox-group>
+            </a-radio-group>
              <a-form-item v-bind="formItemLayout" label="结算后总价">
                 <span>￥{{ finalPrice }}</span>
             </a-form-item>
@@ -170,7 +171,7 @@ export default {
             },
             totalPrice: '',
             columns,
-            checkedList: [],
+            checkedList: '',
             finalPrice: ''
         }
     },
@@ -194,7 +195,9 @@ export default {
         ]),
         ...mapActions([
             'addOrder',
-            'getOrderMatchCoupons'
+            'getOrderMatchCoupons',
+            'distributeRooms',
+            'updateRestRooms'
         ]),
         cancelOrder() {
             this.set_orderModalVisible(false)
@@ -205,6 +208,7 @@ export default {
         changeDate(v) {
             if(this.totalPrice != ''){
                 this.totalPrice = this.form.getFieldValue('roomNum') * moment(v[1]).diff(moment(v[0]), 'day') * Number(this.currentOrderRoom.price)
+                this.finalPrice=this.totalPrice
             }
         },
         changePeopleNum(v){
@@ -212,26 +216,34 @@ export default {
         },
         changeRoomNum(v) {
             this.totalPrice = Number(v) * Number(this.currentOrderRoom.price) * moment(this.form.getFieldValue('date')[1]).diff(moment(this.form.getFieldValue('date')[0]),'day')
+            this.finalPrice = this.totalPrice
         },
         onchange() {
-            this.finalPrice = this.totalPrice
-            if(this.checkedList.length>0){
-                this.orderMatchCouponList.filter(item => this.checkedList.indexOf(item.id)!=-1).forEach(item => this.finalPrice= this.finalPrice-item.discountMoney)
+            console.log("I was used");
+            console.log(this.checkedList);
+            this.finalPrice = this.totalPrice;
+            if(this.checkedList>0){
+                this.orderMatchCouponList.filter(item => this.checkedList===item.id).forEach(item => (item.discount)===0?(this.finalPrice=this.totalPrice):this.finalPrice= this.finalPrice*item.discount*0.1);
+                this.orderMatchCouponList.filter(item => this.checkedList===item.id).forEach(item => this.finalPrice= this.finalPrice-item.discountMoney);
+                this.finalPrice=parseFloat(this.finalPrice).toFixed(2);
             }else{
                 
             }
         },
         handleSubmit(e) {
             e.preventDefault();
+            console.log(this);
             this.form.validateFieldsAndScroll((err, values) => {
                 if (!err) {
                     const data = {
                         hotelId: this.currentHotelId,
                         hotelName: this.currentHotelInfo.name,
                         userId: Number(this.userId),
-                        checkInDate: moment(this.form.getFieldValue('date')[0]).format('YYYY-MM-DD'),
-                        checkOutDate: moment(this.form.getFieldValue('date')[1]).format('YYYY-MM-DD'),
-                        roomType: this.currentOrderRoom.roomType == '大床房' ? 'BigBed' : this.currentOrderRoom.roomType == '双床房' ? 'DoubleBed' : 'Family',
+                        checkInDate: moment(this.form.getFieldValue('date')[0]).format('YYYY-MM-DD 12:00:00'),
+                        checkOutDate: moment(this.form.getFieldValue('date')[1]).format('YYYY-MM-DD 12:00:00'),
+                        roomType: this.currentOrderRoom.roomType === '大床房' ? 'BigBed' :
+                            this.currentOrderRoom.roomType === '双床房' ? 'DoubleBed' :
+                            this.currentOrderRoom.roomType === '家庭房' ? 'Family' : 'PresidentBed',
                         roomNum: this.form.getFieldValue('roomNum'),
                         peopleNum: this.form.getFieldValue('peopleNum'),
                         haveChild: this.form.getFieldValue('haveChild'),
@@ -239,6 +251,8 @@ export default {
                         price: this.checkedList.length > 0 ? this.finalPrice: this.totalPrice
                     }
                     this.addOrder(data)
+                    this.updateRestRooms(Number(this.currentHotelId))
+                    this.$router.go(0)
                 }
             });
         },
@@ -250,8 +264,8 @@ export default {
                 hotelId: this.currentHotelId,
                 orderPrice: this.totalPrice,
                 roomNum: this.form.getFieldValue('roomNum'),
-                checkIn: moment(this.form.getFieldValue('date')[0]).format('YYYY-MM-DD'),
-                checkOut: moment(this.form.getFieldValue('date')[1]).format('YYYY-MM-DD'),
+                checkIn: moment(this.form.getFieldValue('date')[0]).format('YYYY-MM-DD 12:00:00'),
+                checkOut: moment(this.form.getFieldValue('date')[1]).format('YYYY-MM-DD 12:00:00' ),
             }
             this.getOrderMatchCoupons(data)
         }

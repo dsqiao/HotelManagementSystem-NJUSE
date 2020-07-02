@@ -11,8 +11,17 @@
     <select id="getAccountById" resultMap="User">
         select * from User where id=#{id}
     </select>
+
     <update id="updateAccount">
-        update User set password=#{password},username=#{userName},phonenumber=#{phoneNumber}
+        update User set password=#{password},username=#{userName}, email=#{email}, phonenumber=#{phoneNumber}
+        where id=#{id}
+    </update>
+    <update id="beMember">
+        update User set memberType=#{memberType}, birthday=#{birthday}, companyName=#{companyName}
+        where id=#{id}
+    </update>
+    <update id="updateCredit">
+        update User set credit=#{credit}
         where id=#{id}
     </update>
 
@@ -25,5 +34,6 @@
         <result column="phonenumber" property="phoneNumber"></result>
         <result column="credit" property="credit"></result>
         <result column="usertype" property="userType"></result>
+        <result column="membertype" property="memberType"></result>
     </resultMap>
 </mapper>

@@ -51,6 +51,10 @@ public class Coupon {
      * 优惠券状态 是否已经失效 1可用 0失效
      */
     private Integer status;
+    /**
+     * 多间优惠门槛
+     */
+    private Integer targetRoomNum;
 
     public LocalDateTime getStartTime() {
         return startTime;
@@ -138,6 +142,13 @@ public class Coupon {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+    public Integer getTargetRoomNum() {
+        return targetRoomNum;
+    }
+
+    public void setTargetRoomNum(Integer targetRoomNum) {
+        this.targetRoomNum = targetRoomNum;
     }
 
     public Coupon() {

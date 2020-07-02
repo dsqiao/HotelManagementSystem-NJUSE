@@ -16,5 +16,13 @@ public interface AdminMapper {
 
     int addManager(User user);
 
+    int addSalesman(User user);
+
     List<User> getAllManagers();
+
+    List<User> getAllClients();
+
+    List<User> getAllSalesman();
+
+    void deleteUser(Integer userId);
 }

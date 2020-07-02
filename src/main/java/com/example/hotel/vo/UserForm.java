@@ -5,6 +5,11 @@ package com.example.hotel.vo;
  * @date 2019/3/23
  */
 public class UserForm {
+
+    /**
+     * 用户类型，可选Client或HotelManager
+     */
+    private String userType;
     /**
      * 用户邮箱，不可重复
      */
@@ -31,4 +36,13 @@ public class UserForm {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
 }

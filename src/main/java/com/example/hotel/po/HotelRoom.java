@@ -2,19 +2,23 @@ package com.example.hotel.po;
 
 import com.example.hotel.enums.RoomType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class HotelRoom {
+
     private Integer id;
     private RoomType roomType;
     private Integer hotelId;
     private double price;
     /**
-     * 当前剩余可预定房间数
-     */
-    private int curNum;
-    /**
      * 某类型房间总数
      */
     private int total;
+
+    private int rest;
 
     public Integer getId() {
         return id;
@@ -48,13 +52,6 @@ public class HotelRoom {
         this.price = price;
     }
 
-    public int getCurNum() {
-        return curNum;
-    }
-
-    public void setCurNum(int curNum) {
-        this.curNum = curNum;
-    }
 
     public int getTotal() {
         return total;
@@ -62,5 +59,13 @@ public class HotelRoom {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getRest() {
+        return rest;
+    }
+
+    public void setRest(int rest) {
+        this.rest = rest;
     }
 }

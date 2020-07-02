@@ -5,6 +5,8 @@ package com.example.hotel.vo;
  * @Date: 2020-03-03
  */
 public class UserInfoVO {
+
+    private String email;
     private String password;
     private String userName;
     private String phoneNumber;
@@ -33,4 +35,13 @@ public class UserInfoVO {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
 }

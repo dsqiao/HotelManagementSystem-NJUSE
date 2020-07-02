@@ -6,22 +6,39 @@
             
         </div>
         <a-menu v-model="current" mode="horizontal" theme="light">
-            <a-menu-item key="1" @click="selectMenu">
-                <router-link to="/hotel/hotelList">
+            <a-menu-item key="1" @click="selectMenu" v-if="userInfo.userType==='Client'">
+                <router-link to="/hotel/hotelList" >
                     <a-icon type="home" />首页
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="2" @click="jumpToUserInfo" v-if="userInfo.userType=='Client'">
+            <a-menu-item key="2" @click="jumpToUserInfo" v-if="userInfo.userType === 'Client'">
                 <a-icon type="user" />个人中心
             </a-menu-item>
-            <a-menu-item key="3" @click="selectMenu" v-if="userInfo.userType=='HotelManager'">
+            
+            <a-menu-item key="3" @click="selectMenu" v-if="userInfo.userType ==='HotelManager'">
                 <router-link :to="{ name: 'manageHotel'}">
                      <a-icon type="switcher" />酒店管理
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="4" @click="selectMenu" v-if="userInfo.userType=='Admin'">
+            <a-menu-item key="4" @click="selectMenu" v-if="userInfo.userType === 'Admin'">
                 <router-link :to="{ name: 'manageUser'}">
                      <a-icon type="user" />账户管理
+                </router-link>
+            </a-menu-item>
+
+            <a-menu-item key="5" @click="selectMenu" v-if="userInfo.userType==='Client'">
+                <router-link  to="/hotel/searchHotels">
+                <a-icon type="search"/>搜索酒店
+                </router-link>
+            </a-menu-item>
+            <a-menu-item key="6" @click="selectMenu" v-if="userInfo.userType === 'Salesman'">
+                <router-link :to="{ name: 'creditRecharge'}">
+                    <a-icon type="credit-card" />信用充值
+                </router-link>
+            </a-menu-item>
+            <a-menu-item key="7" @click="selectMenu" v-if="userInfo.userType === 'Salesman'">
+                <router-link :to="{ name: 'websiteDiscount'}">
+                    <a-icon type="pay-circle"/>网站活动
                 </router-link>
             </a-menu-item>
         </a-menu>
@@ -65,17 +82,23 @@ export default {
         ...mapGetters([
             'userId',
             'userInfo'
-        ])
+        ]),
     },
     mounted() {
-        if (this.$route.name == 'hotelList' || this.$route.name == 'hotelDetail') {
+        if (this.$route.name === 'hotelList' || this.$route.name === 'hotelDetail') {
             this.current = ['1']
-        }else if(this.$route.name == 'userInfo') {
+        } else if (this.$route.name === 'userInfo') {
             this.current = ['2']
-        }else if(this.$route.name == 'manageHotel') {
+        } else if (this.$route.name === 'manageHotel') {
             this.current = ['3']
-        }else {
+        } else if (this.$route.name ==='manageUser'){
             this.current = ['4']
+        } else if (this.$route.name === 'searchHotels'){
+            this.current=['5']
+        } else if (this.$route.name === 'creditRecharge'){
+            this.current = ['6']
+        } else {
+            this.current = ['7']
         }
     },
     methods: {

@@ -14,6 +14,10 @@ public class UserVO {
     private String phoneNumber;
     private double credit;
     private UserType userType;
+    // 会员等级，分三类：非会员，普通会员，企业会员
+    private String memberType;
+    private String birthday; // 生日（普通会员才有）
+    private String companyName; // 企业名称（企业会员才有）
 
     public Integer getId() {
         return id;
@@ -70,4 +74,28 @@ public class UserVO {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
+
+    public void setMemberType(String memberType) {
+        this.memberType = memberType;
+    }
+    public String getMemberType() {
+        return memberType;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
 }

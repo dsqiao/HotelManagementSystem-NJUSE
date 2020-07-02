@@ -2,10 +2,7 @@ package com.example.hotel.controller.user;
 
 import com.example.hotel.bl.user.AccountService;
 import com.example.hotel.po.User;
-import com.example.hotel.vo.UserForm;
-import com.example.hotel.vo.ResponseVO;
-import com.example.hotel.vo.UserInfoVO;
-import com.example.hotel.vo.UserVO;
+import com.example.hotel.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +27,7 @@ public class AccountController {
 
     @PostMapping("/register")
     public ResponseVO registerAccount(@RequestBody UserVO userVO) {
+        System.out.println(userVO.getUserName());
         return accountService.registerAccount(userVO);
     }
 
@@ -44,9 +42,18 @@ public class AccountController {
     }
 
     @PostMapping("/{id}/userInfo/update")
-    public ResponseVO updateInfo(@RequestBody UserInfoVO userInfoVO,@PathVariable int id){
-        return accountService.updateUserInfo(id,userInfoVO.getPassword(),userInfoVO.getUserName(),userInfoVO.getPhoneNumber());
+    public ResponseVO updateInfo(@RequestBody UserInfoVO userInfoVO, @PathVariable int id){
+        return accountService.updateUserInfo(
+                id,
+                userInfoVO.getPassword(),
+                userInfoVO.getUserName(),
+                userInfoVO.getEmail(),
+                userInfoVO.getPhoneNumber());
+    }
 
+    @PostMapping("/{id}/userInfo/beMember")
+    public ResponseVO beMember(@RequestBody MemberVO memberVO, @PathVariable int id) {
+        return accountService.beMember(id, memberVO.getMemberType(), memberVO.getBirthday(), memberVO.getCompanyName());
     }
 
 }

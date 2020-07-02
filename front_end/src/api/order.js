@@ -21,9 +21,38 @@ export function getUserOrdersAPI(data) {
         method: 'GET',
     })
 }
+
+export function executeOrderAPI(orderId) {
+    return axios({
+        url: `${api.orderPre}/${orderId}/executeOrder`,
+        method: 'POST',
+    })
+}
+
+export function getManagedOrdersAPI(param) {
+    return axios({
+        url: `${api.orderPre}/${param.managerId}/managedOrders`,
+        method: 'GET',
+    })
+}
 export function cancelOrderAPI(orderId) {
     return axios({
         url: `${api.orderPre}/${orderId}/annulOrder`,
         method: 'GET',
+    })
+}
+
+export function updateOverTimeOrdersAPI(params) {
+    return axios({
+        url: `${api.orderPre}/updateOverTimeOrders`,
+        method: 'GET',
+        params
+    })
+}
+
+export function checkOutOrderAPI(id) {
+    return axios({
+        url: `${api.orderPre}/${id}/checkOutOrder`,
+        method: 'POST',
     })
 }

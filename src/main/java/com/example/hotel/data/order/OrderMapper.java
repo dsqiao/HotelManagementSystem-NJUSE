@@ -22,8 +22,12 @@ public interface OrderMapper {
 
     List<Order> getUserOrders(@Param("userid") int userid);
 
-    int annulOrder(@Param("orderid") int orderid);
+    int annulOrder(@Param("orderId") int orderId);
 
     Order getOrderById(@Param("orderid") int orderid);
+
+    List<Order> getManagedOrders(@Param("managerId") int managerId);
+
+    int updateOrderState(@Param("orderId") int orderId,@Param("orderState") String orderState);
 
 }

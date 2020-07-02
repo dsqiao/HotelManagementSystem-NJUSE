@@ -30,3 +30,10 @@ export function updateUserInfoAPI(data) {
         data
     })
 }
+export function beMemberAPI(data) {
+    return axios({
+        url: `${api.userPre}/${data.id}/userInfo/beMember`,
+        method: 'POST',
+        data
+    })
+}

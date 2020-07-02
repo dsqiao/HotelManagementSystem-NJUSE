@@ -1,12 +1,16 @@
 package com.example.hotel.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum HotelStar {
-    Five("五星级"),
+
+
+    Three("三星级"),
     Four("四星级"),
-    Three("三星级");
+    Five("五星级");
 
     private String value;
-
     HotelStar(String value) {
         this.value = value;
     }
@@ -15,4 +19,7 @@ public enum HotelStar {
     public String toString() {
         return value;
     }
+
+
+
 }

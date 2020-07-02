@@ -9,15 +9,23 @@
         select * from OrderList where userId=#{userid}
     </select>
     <insert id="addOrder" parameterType="com.example.hotel.po.Order" useGeneratedKeys="true" keyProperty="id">
-        insert into OrderList(userId,hotelId,hotelName,checkInDate,checkOutDate,roomType,roomNum,peopleNum,haveChild,createDate,price,clientName,phoneNumber,orderState)
-        values(#{userId},#{hotelId},#{hotelName},#{checkInDate},#{checkOutDate},#{roomType},#{roomNum},#{peopleNum},#{haveChild},#{createDate},#{price},#{clientName},#{phoneNumber},#{orderState})
+        insert into OrderList(userId,hotelId,hotelName,checkInDate,checkOutDate,roomType,roomNum,peopleNum,haveChild,createDate,price,clientName,phoneNumber,orderState,latestTime)
+        values(#{userId},#{hotelId},#{hotelName},#{checkInDate},#{checkOutDate},#{roomType},#{roomNum},#{peopleNum},#{haveChild},#{createDate},#{price},#{clientName},#{phoneNumber},#{orderState},#{latestTime})
     </insert>
     <select id="getOrderById" resultMap="Order">
         select * from OrderList where id=#{orderid}
     </select>
-   <!--取消订单的数据库操作-->
+    <select id="getManagedOrders" resultMap="Order">
+        select * from OrderList where orderlist.hotelId in (SELECT id FROM hotel.hotel where hotel.manager_id=#{managerId})
+    </select>
+    <update id="updateOrderState">
+        update orderlist set orderState=#{orderState}
+        where id=#{orderId}
+    </update>
 
-
+    <delete id="annulOrder">
+        delete from orderlist where id=#{orderId}
+    </delete>
 
     <resultMap id="Order" type="com.example.hotel.po.Order">
     </resultMap>

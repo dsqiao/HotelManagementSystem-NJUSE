@@ -33,10 +33,20 @@ public interface AccountMapper {
      * @param id
      * @param password
      * @param username
+     * @param email
      * @param phonenumber
      * @return
      */
-     int updateAccount(@Param("id") int id, @Param("password") String password,@Param("userName") String username, @Param("phoneNumber") String phonenumber);
+     int updateAccount(
+             @Param("id") int id,
+             @Param("password") String password,
+             @Param("userName") String username,
+             @Param("email") String email,
+             @Param("phoneNumber") String phonenumber
+     );
 
+     int beMember(@Param("id") int id, @Param("memberType") String memberType, @Param("birthday") String birthday, @Param("companyName") String companyName);
+
+     int updateCredit(@Param("id") int id,@Param("credit") double credit);
 
 }

@@ -12,4 +12,11 @@ public interface CouponMapper {
     int insertCoupon(Coupon coupon);
 
     List<Coupon> selectByHotelId(Integer hotelId);
+
+    List<Coupon> selectWebsiteCoupon1();
+    List<Coupon> selectWebsiteCoupon2();
+    List<Coupon> selectWebsiteCoupon3();
+    List<Coupon> selectWebsiteCoupon4();
+
+    void deleteByHotelId(Integer hotelId);
 }

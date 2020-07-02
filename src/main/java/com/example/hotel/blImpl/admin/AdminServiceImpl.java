@@ -18,8 +18,10 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
     private final static String ACCOUNT_EXIST = "账号已存在";
+
     @Autowired
     AdminMapper adminMapper;
+
     @Override
     public ResponseVO addManager(UserForm userForm) {
         User user = new User();
@@ -36,7 +38,42 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public ResponseVO addSalesman(UserForm userForm) {
+        User user = new User();
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setUserType(UserType.Salesman);
+        try {
+            adminMapper.addSalesman(user);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return ResponseVO.buildFailure(ACCOUNT_EXIST);
+        }
+        return ResponseVO.buildSuccess(true);
+    }
+
+    @Override
     public List<User> getAllManagers() {
         return adminMapper.getAllManagers();
+    }
+
+    @Override
+    public List<User> getAllClients(){
+        return adminMapper.getAllClients();
+    }
+
+    @Override
+    public List<User> getAllSalesman(){
+        return adminMapper.getAllSalesman();
+    }
+    @Override
+    public ResponseVO deleteUser(Integer userId){
+        try {
+            adminMapper.deleteUser(userId);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return ResponseVO.buildFailure("删除失败");
+        }
+        return ResponseVO.buildSuccess(true);
     }
 }

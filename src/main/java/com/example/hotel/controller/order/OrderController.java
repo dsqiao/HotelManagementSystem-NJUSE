@@ -6,6 +6,8 @@ import com.example.hotel.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Author: chenyizong
  * @Date: 2020-02-29
@@ -29,9 +31,9 @@ public class OrderController {
         return ResponseVO.buildSuccess(orderService.getAllOrders());
     }
 
-    @GetMapping("/{userid}/getUserOrders")
-    public  ResponseVO retrieveUserOrders(@PathVariable int userid){
-        return ResponseVO.buildSuccess(orderService.getUserOrders(userid));
+    @GetMapping("/{userId}/getUserOrders")
+    public  ResponseVO retrieveUserOrders(@PathVariable int userId){
+        return ResponseVO.buildSuccess(orderService.getUserOrders(userId));
     }
 
     @GetMapping("/{orderid}/annulOrder")
@@ -39,5 +41,28 @@ public class OrderController {
         return orderService.annulOrder(orderid);
     }
 
+    @GetMapping("/{managerId}/managedOrders")
+    public ResponseVO getManagedOrders(@PathVariable Integer managerId){
+        return ResponseVO.buildSuccess(orderService.getManagedOrders(managerId));
+    }
 
+    @PostMapping("/{orderId}/executeOrder")
+    public ResponseVO executeOrder(@PathVariable Integer orderId){
+        return orderService.executeOrder(orderId);
+    }
+
+    @GetMapping("/updateOverTimeOrders")
+    public ResponseVO updateOverTimeOrders(@RequestParam Integer userId,String type){
+        return ResponseVO.buildSuccess(orderService.updateOverTimeOrders(userId,type));
+    }
+    @GetMapping("/{hotelId}/allOrders")
+    public ResponseVO retrieveHotelOrders(@PathVariable Integer hotelId) {
+        return ResponseVO.buildSuccess(orderService.getHotelOrders(hotelId));
+    }
+
+
+    @PostMapping("/{orderId}/checkOutOrder")
+    public ResponseVO checkOutOrder(@PathVariable Integer orderId){
+        return orderService.checkOutOrder(orderId);
+    }
 }

@@ -4,13 +4,35 @@
 
     <insert id="insertCoupon" parameterType="com.example.hotel.po.Coupon"
             useGeneratedKeys="true" keyProperty="id">
-        insert into Coupon(description,couponName,target_money,discount_money,start_time,end_time,hotelId,couponType,discount,status)
-        values(#{description},#{couponName},#{targetMoney},#{discountMoney},#{startTime},#{endTime},#{hotelId},#{couponType},#{discount},#{status})
+        insert into Coupon(description,couponName,target_money,discount_money,start_time,end_time,hotelId,couponType,discount,status,targetRoomNum)
+        values(#{description},#{couponName},#{targetMoney},#{discountMoney},#{startTime},#{endTime},#{hotelId},#{couponType},#{discount},#{status},#{targetRoomNum})
     </insert>
 
     <select id="selectByHotelId" resultMap="Coupon">
         select * from Coupon where hotelId=#{hotelId}
     </select>
+
+    <select id="selectWebsiteCoupon1" resultMap="Coupon">
+        select * from Coupon where hotelId=-1 and couponType=1
+    </select>
+    <select id="selectWebsiteCoupon2" resultMap="Coupon">
+        select * from Coupon where hotelId=-1 and couponType=2
+    </select>
+    <select id="selectWebsiteCoupon3" resultMap="Coupon">
+        select * from Coupon where hotelId=-1 and couponType=3
+    </select>
+    <select id="selectWebsiteCoupon4" resultMap="Coupon">
+        select * from Coupon where hotelId=-1 and couponType=4
+    </select>
+
+    <select id="selectNumOfRows">
+        select count(*) from Coupon
+    </select>
+
+    <delete id="deleteByHotelId" >
+       delete  from Coupon where hotelId=#{hotelId}
+    </delete>
+
 
 
     <resultMap id="Coupon" type="com.example.hotel.po.Coupon">
@@ -25,5 +47,6 @@
         <result column="discount_money" property="discountMoney"></result>
         <result column="start_time" property="startTime"></result>
         <result column="end_time" property="endTime"></result>
+        <result column="targetRoomNum" property="targetRoomNum"></result>
     </resultMap>
 </mapper>

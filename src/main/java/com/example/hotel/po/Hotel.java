@@ -13,6 +13,7 @@ public class Hotel {
     private BizRegion bizRegion;
     private HotelStar hotelStar;
     private Double rate;
+    private int evaluatePeople=1;
     private String description;
     private String phoneNum;
     /**
@@ -55,6 +56,7 @@ public class Hotel {
     public HotelStar getHotelStar() {
         return hotelStar;
     }
+
 
     public void setHotelStar(HotelStar hotelStar) {
         this.hotelStar = hotelStar;

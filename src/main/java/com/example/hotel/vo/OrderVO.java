@@ -1,6 +1,7 @@
 package com.example.hotel.vo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: chenyizong
@@ -22,6 +23,21 @@ public class OrderVO {
     private String clientName;
     private String phoneNumber;
     private String orderState;
+    private String orderCancelDate;
+    private String latestTime;
+
+
+    public void setOrderCancelDate(String orderCancelDate) {
+        this.orderCancelDate = orderCancelDate;
+    }
+
+    public String getLatestTime() {
+        return latestTime;
+    }
+
+    public void setLatestTime(String latestTime) {
+        this.latestTime = latestTime;
+    }
 
     public Integer getId() {
         return id;
@@ -141,5 +157,12 @@ public class OrderVO {
 
     public void setOrderState(String orderState) {
         this.orderState = orderState;
+    }
+
+    public void setCancelDate(String cancelDate) {
+        this.orderCancelDate=cancelDate;
+    }
+    public String getOrderCancelDate(){
+        return orderCancelDate;
     }
 }

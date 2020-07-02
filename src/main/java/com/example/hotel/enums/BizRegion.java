@@ -1,7 +1,9 @@
 package com.example.hotel.enums;
 
 public enum BizRegion {
-    XiDan("西单");
+    XiDan("西单"),
+    XinJieKou("新街口"),
+    WanDa("万达");
 
     private String value;
 
