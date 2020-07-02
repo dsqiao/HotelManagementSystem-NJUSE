@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.hotel.data.hotel.OneRoomMapper">
+
+    <insert id="insertRoomInfo" parameterType="com.example.hotel.po.OneRoom" useGeneratedKeys="true" keyProperty="orderId">
+        insert into oneroom(orderId, hotelId, checkInDate, checkOutDate, roomId,roomType)
+        values (#{orderId},#{hotelId},#{checkInDate},#{checkOutDate},#{roomId},#{roomType})
+    </insert>
+
+    <delete id="deleteRoomInfo" parameterType="com.example.hotel.po.OneRoom">
+        delete from oneroom where orderId=#{orderId}
+    </delete>
+
+
+    <select id="selectRoomInfoByRoomId" resultMap="oneRoom">
+        select * from oneroom where roomId=#{roomId} and hotelId=#{hotelId}
+    </select>
+
+    <select id="getUsingRooms" resultMap="oneRoom">
+        select * from oneroom where hotelId=#{hotelId} and roomType=#{roomType}
+    </select>
+
+    <select id="getAllRooms" resultMap="oneRoom">
+        select * from oneroom
+    </select>
+
+    <select id="selectRoomsByOrderId" resultType="int">
+        select roomId from oneroom where orderId=#{orderId}
+    </select>
+
+    <resultMap id="oneRoom" type="com.example.hotel.po.OneRoom">
+        <id column="id" property="id"></id>
+        <result column="orderId" property="orderId"></result>
+        <result column="roomId" property="roomId"></result>
+        <result column="hotelId" property="hotelId"></result>
+        <result column="checkInDate" property="checkInDate"></result>
+        <result column="checkOutDate" property="checkOutDate"></result>
+        <result column="roomType" property="roomType"></result>
+    </resultMap>
+
+</mapper>
