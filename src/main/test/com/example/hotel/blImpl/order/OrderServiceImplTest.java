@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,8 @@ class OrderServiceImplTest {
     OrderMapper orderMapper;
 
 
-
-
-    /**
-     * 功能测试：添加单个订单
-     */
-    @org.junit.jupiter.api.Test
-    void addOrder() {
+    @BeforeEach
+    void setUp() {
         OrderVO orderVO=new OrderVO();
         orderVO.setCheckInDate("2020-07-01 12:00:00");
         orderVO.setCheckOutDate("2020-07-25 12:00:00");
@@ -56,6 +52,21 @@ class OrderServiceImplTest {
         orderVO.setHotelName("汉庭酒店");
         orderVO.setPrice(500.0);
         orderService.addOrder(orderVO);
+    }
+
+    @AfterEach
+    void tearDown() {
+        List<Order> orderList=orderMapper.getAllOrders();
+        for(int i=0;i<orderList.size();++i){
+            orderMapper.annulOrder(orderList.get(i).getId());
+        }
+    }
+
+    /**
+     * 功能测试：添加单个订单
+     */
+    @org.junit.jupiter.api.Test
+    void addOrder() {
         List<Order> order=orderMapper.getAllOrders();
         Order newAdd=order.get(order.size()-1);
         assertEquals("2020-07-01 12:00:00",newAdd.getCheckInDate());

@@ -230,10 +230,10 @@ export default {
                 
             }
         },
-        handleSubmit(e) {
+        async handleSubmit(e) {
             e.preventDefault();
             console.log(this);
-            this.form.validateFieldsAndScroll((err, values) => {
+            await this.form.validateFieldsAndScroll((err, values) => {
                 if (!err) {
                     const data = {
                         hotelId: this.currentHotelId,

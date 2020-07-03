@@ -75,9 +75,10 @@ public class RoomServiceImpl implements RoomService {
         LocalDateTime t1=oneRoom.getCheckInDate();
         LocalDateTime t2=oneRoom.getCheckOutDate();
         if( t1.compareTo(checkInDate)==0 ||
-            checkInDate.compareTo(t1)*checkInDate.compareTo(t2)<0||
+            t1.compareTo(checkInDate)*t1.compareTo(checkOutDate)<0||
             t2.compareTo(checkOutDate)==0||
-            checkOutDate.compareTo(t1)*checkOutDate.compareTo(t2)<0) return true;
+            t2.compareTo(checkInDate)*t2.compareTo(checkOutDate)<0||
+            (t1.compareTo(checkInDate)<0&&t2.compareTo(checkOutDate)>0)) return true;
         return false;
     }
 
