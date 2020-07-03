@@ -9,7 +9,7 @@
                     <a-card style="width: 240px">
                         <img
                             alt="example"
-                            :src="baseUrl+logoData[currentHotelInfo.name]+'.jpg'"
+                            :src="baseUrl+currentHotelInfo.name+'.jpg'"
                             slot="cover"
                             referrerPolicy="no-referrer"
                             />
