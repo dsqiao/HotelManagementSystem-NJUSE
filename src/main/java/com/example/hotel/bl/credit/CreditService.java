@@ -8,7 +8,7 @@ public interface CreditService {
     /**
      * 得到该用户信用值
      * @param userId
-     * @return
+     * @return creditVO的list
      */
     List<CreditVO> getUserCredit(int userId);
 

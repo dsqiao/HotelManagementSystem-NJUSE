@@ -147,11 +147,15 @@ public class OrderServiceImpl implements OrderService {
         return ResponseVO.buildSuccess(true);
     }
 
+    /**
+     * 检查订单是否超时导致异常
+     * @param Orders
+     */
 
     public void updateOverTimeOrders(List<Order> Orders){
         for(int i=0;i<Orders.size();++i){
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String executed=Orders.get(i).getCheckInDate().substring(0,10)+" 18:00:00";
+            String executed=Orders.get(i).getCheckInDate().substring(0,10)+" 18:00:00";//到六点之前的话执行不算违约
             TemporalAccessor parse=formatter.parse(executed);
             LocalDateTime latest=LocalDateTime.from(parse);
             LocalDateTime current=LocalDateTime.now();

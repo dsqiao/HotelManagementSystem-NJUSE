@@ -8,21 +8,21 @@ import java.util.List;
 public interface CouponService {
     /**
      * 返回某一订单可用的优惠策略列表
-     * @param orderVO
-     * @return
+     * @param orderVO order
+     * @return coupon的list
      */
     List<Coupon> getMatchOrderCoupon(OrderVO orderVO);
 
     /**
      * 查看某个酒店提供的所有优惠策略（包括失效的）
-     * @param hotelId
-     * @return
+     * @param hotelId hotelId
+     * @return coupon的list
      */
     List<Coupon> getHotelAllCoupon(Integer hotelId);
 
     /**
      * 获得四种类型的网站优惠
-     * @return
+     * @return coupon的list
      */
     List<Coupon> getWebsiteCoupon1List();//生日
     List<Coupon> getWebsiteCoupon2List();//多间
@@ -32,34 +32,35 @@ public interface CouponService {
     /**
      * 删除该酒店所有优惠策略
      * @param hotelId
+     * @return  coupon的list
      */
     List<Coupon> deleteHotelAllCoupon(Integer hotelId);
 
     /**
      * 添加酒店满减优惠策略
      * @param couponVO
-     * @return
+     * @return couponVO
      */
     CouponVO addHotelTargetMoneyCoupon(HotelTargetMoneyCouponVO couponVO);
 
     /**
      * 添加酒店限时策略
      * @param couponVO
-     * @return
+     * @return couponVO
      */
     CouponVO addTimeCoupon(TimeCouponVO couponVO);
 
     /**
      *添加酒店多间优惠策略
      * @param couponVO
-     * @return
+     * @return  couponVO
      */
     CouponVO addMultipleCoupon(MultipleCouponVO couponVO);
 
     /**
      *添加生日特惠
      * @param couponVO
-     * @return
+     * @return couponVO
      */
     CouponVO addBirthCoupon(BirthCouponVO couponVO);
 }
