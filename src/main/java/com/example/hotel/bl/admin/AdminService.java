@@ -14,8 +14,8 @@ public interface AdminService {
 
     /**
      * 添加酒店管理人员账号
-     * @param userForm
-     * @return
+     * @param userForm 用户类型
+     * @return responseVO
      */
     ResponseVO addManager(UserForm userForm);
 
@@ -25,23 +25,25 @@ public interface AdminService {
     ResponseVO addSalesman(UserForm userForm);
     /**
      * 获得所有酒店管理人员信息
-     * @return
+     * @return user的list
      */
     List<User> getAllManagers();
 
     /**
      * 获得所有客户的信息
+     * @return user的list
      */
     List<User> getAllClients();
 
     /**
      * 获取所有网站营销人员的信息
+     * @return user的list
      */
     List<User> getAllSalesman();
 
     /**
      * 删除用户
-     * @return
+     * @return responseVO
      */
     ResponseVO deleteUser(Integer userId);
 }

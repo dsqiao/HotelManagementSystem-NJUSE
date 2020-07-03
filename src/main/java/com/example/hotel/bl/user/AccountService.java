@@ -40,6 +40,14 @@ public interface AccountService {
      */
     ResponseVO updateUserInfo(int id, String password, String username, String email, String phonenumber, String avatarUrl);
 
+    /**
+     * 成为会员
+     * @param id
+     * @param memberType
+     * @param birthday
+     * @param companyName
+     * @return
+     */
     ResponseVO beMember(int id, String memberType, String birthday, String companyName);
 
 }

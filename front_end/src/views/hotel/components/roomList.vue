@@ -20,12 +20,18 @@
       </a-table>
     </div>
     <a-modal :visible="datePickVisible" title="日期选择" :footer="null" @cancel="ok">
-        <a-date-picker  @change="onStart" size="small" placeholder="入住时间"
+        <a-label>计划入住时间：</a-label>
+        <a-date-picker  @change="onStart" size="medium" placeholder="入住时间" style="margin-left: 16px"
           :defaultValue="startDate" 
         />
-        <a-date-picker  @change="onEnd" size="small" placeholder="退房时间" style="margin-left:16px"
+        <br/>
+        <br/>
+        <a-label>计划离店时间：</a-label>
+        <a-date-picker  @change="onEnd" size="medium" placeholder="离店时间" style="margin-left:16px;"
           :defaultValue="endDate"
         />
+        <br/>
+        <a-button @click="ok" type="primary" style="margin-top: 30px; margin-left: 320px">查看剩余房间数量</a-button>
     </a-modal>
     <OrderModal></OrderModal>
   </div>

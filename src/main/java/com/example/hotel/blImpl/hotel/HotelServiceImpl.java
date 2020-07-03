@@ -104,6 +104,23 @@ public class HotelServiceImpl implements HotelService {
         return hotelVO;
     }
 
+    /**
+     * 搜索酒店
+     * @param address
+     * @param hotelName
+     * @param bizRegion
+     * @param lowStar 星级最小值
+     * @param highStar 星级最大值
+     * @param rooms
+     * @param roomType
+     * @param lowPrice
+     * @param highPrice
+     * @param InDate 入住时间
+     * @param OutDate 退房时间
+     * @return
+     * @throws ServiceException
+     */
+
     @Override
     public List<HotelVO> searchHotels(String address, String hotelName, String bizRegion, Integer  lowStar, Integer highStar, Integer rooms, Integer roomType, Double lowPrice,Double highPrice,String InDate, String OutDate)throws ServiceException {
         if(address.equals("null") || bizRegion.equals("null")){
@@ -121,6 +138,14 @@ public class HotelServiceImpl implements HotelService {
         }
         return hotelVOList;
     }
+
+    /**
+     * 判断地址，商圈是否匹配
+     * @param hotelVO
+     * @param address
+     * @param bizRegion
+     * @return
+     */
     public boolean isValid(HotelVO hotelVO,String address,String bizRegion){
         if(hotelVO.getAddress()==null||hotelVO.getBizRegion()==null) return false;
         int AddLength=address.length();
@@ -144,6 +169,13 @@ public class HotelServiceImpl implements HotelService {
         return  ADDR&&BIZ;
     }
 
+    /**
+     * 判断星级是否匹配
+     * @param hotelVO
+     * @param lowStar
+     * @param highStar
+     * @return
+     */
     public boolean isValid(HotelVO hotelVO,Integer lowStar,Integer highStar){
         if (hotelVO.getHotelStar()==null) return  false;
         HotelStar hotelStar=HotelStar.valueOf(hotelVO.getHotelStar());
@@ -157,6 +189,18 @@ public class HotelServiceImpl implements HotelService {
             return true;
         return  false;
     }
+
+    /**
+     * 判断酒店房间数量，价格，入住时间是否匹配
+     * @param hotelVO
+     * @param rooms
+     * @param roomtype
+     * @param lowPrice
+     * @param highPrice
+     * @param InDate
+     * @param OutDate
+     * @return
+     */
     public boolean isValid(HotelVO hotelVO,Integer rooms ,Integer roomtype,Double lowPrice,Double highPrice,String InDate, String OutDate){
         List<HotelRoom> room = roomService.retrieveHotelRoomInfo(hotelVO.getId());
         List<OneRoom> using=oneRoomMapper.getUsingRooms(hotelVO.getId(),RoomType.getValue(roomtype));
@@ -205,6 +249,12 @@ public class HotelServiceImpl implements HotelService {
         return selectedOrderedHotel;
     }
 
+    /**
+     * 通过地址和商圈筛选酒店
+     * @param bizRegion
+     * @param address
+     * @return
+     */
     public List<HotelVO> getHotelByBizRegionAndAddress(String bizRegion,String address){
         List<HotelVO> allHotel=hotelMapper.selectAllHotel();
         List<HotelVO> selected = new ArrayList<>();

@@ -2,14 +2,12 @@
     <div class="info-wrapper">
         <a-tabs>
             <a-tab-pane tab="我的信息" key="1">
-                <img :src="userInfo.avatarUrl" class="avatar" alt="avatar"/>
-                <a-upload
-                        name="avatar"
-                        :show-upload-list="false"
-                        :before-upload="beforeUpload"
-                >
-                    <a-button> <a-icon type="upload" />更改头像</a-button>
-                </a-upload>
+
+                <div class="avatar-wrapper">
+                    <img :src="userInfo.avatarUrl" class="avatar" alt="avatar"/>
+                    <span style="margin-top: 25px; font-size: 20px">{{ userInfo.userName }}</span>
+                </div>
+
                 <a-form :form="form" style="margin-top: 30px">
 
                     <a-form-item label="用户名" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
@@ -37,10 +35,10 @@
                         />
                         <span v-else>{{ userInfo.phoneNumber}}</span>
                     </a-form-item>
-                    <a-form-item label="信用值" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }">
+                    <a-form-item label="信用值" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }" v-if="userInfo.userType === 'Client'">
                         <span>{{ userInfo.credit }}</span>
                     </a-form-item>
-                    <a-form-item label="会员等级" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1}">
+                    <a-form-item label="会员等级" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1}" v-if="userInfo.userType === 'Client'">
                         <span>{{ userInfo.memberType }}</span>
                     </a-form-item>
                     <a-form-item label="出生日期" :label-col="{span:3}" :wrapper-col="{ span : 8, offset : 1}"
@@ -65,17 +63,26 @@
                             取消
                         </a-button>
                     </a-form-item>
-                    <a-form-item :wrapper-col="{ span: 8, offset: 4 }" v-else>
-                        <a-button type="primary" @click="modifyInfo">
+                    <a-form-item :wrapper-col="{ span: 12, offset: 1}" v-else>
+                        <a-upload
+                                name="avatar"
+                                :show-upload-list="false"
+                                :before-upload="beforeUpload"
+                        >
+                            <a-button type="primary"> <a-icon type="upload" />更换头像</a-button>
+                        </a-upload>
+                        <a-button type="primary" @click="modifyInfo" style="margin-left: 30px">
+                            <a-icon type="edit"/>
                             修改信息
                         </a-button>
-                        <a-button type="primary" style="margin-left: 30px" @click="getMembership" v-if="userInfo.userType=='Client'&&userInfo.memberType === '非会员'">
+                        <a-button type="primary" style="margin-left: 30px" @click="getMembership" v-if="userInfo.userType === 'Client'&&userInfo.memberType === '非会员'">
+                            <a-icon type="team"/>
                             成为会员
                         </a-button>
                     </a-form-item>
                 </a-form>
             </a-tab-pane>
-            <a-tab-pane tab="我的订单" key="2" v-if="userInfo.userType=='Client'">
+            <a-tab-pane tab="我的订单" key="2" v-if="userInfo.userType === 'Client'">
                 <a-table
                         :columns="columns"
                         :dataSource="userOrderList"
@@ -85,24 +92,24 @@
                         <span>￥{{ text }}</span>
                     </span>
                     <span slot="roomType" slot-scope="text">
-                        <span v-if="text == 'BigBed'">大床房</span>
-                        <span v-if="text == 'DoubleBed'">双床房</span>
-                        <span v-if="text == 'Family'">家庭房</span>
-                        <span v-if="text == 'PresidentBed'">总统套房</span>
+                        <span v-if="text === 'BigBed'">大床房</span>
+                        <span v-if="text === 'DoubleBed'">双床房</span>
+                        <span v-if="text === 'Family'">家庭房</span>
+                        <span v-if="text === 'PresidentBed'">总统套房</span>
                     </span>
                     <a-tag slot="orderState" color="blue" slot-scope="text">
                         {{ text }}
                     </a-tag>
                     <span slot="action" slot-scope="record">
                         <a-button type="primary" size="small" @click="showOrder(record)">查看</a-button>
-                        <a-divider type="vertical" v-if="record.orderState == '已预订'"></a-divider>
+                        <a-divider type="vertical" v-if="record.orderState === '已预订'"></a-divider>
                         <a-popconfirm
                                 title="你确定撤销该笔订单吗？"
                                 @confirm="confirmCancelOrder(record.id)"
                                 @cancel="cancelCancelOrder"
                                 okText="确定"
                                 cancelText="取消"
-                                v-if="record.orderState == '已预订'"
+                                v-if="record.orderState === '已预订'"
                         >
                             <a-button type="danger" size="small">撤销</a-button>
                         </a-popconfirm>
@@ -110,7 +117,7 @@
                     </span>
                 </a-table>
             </a-tab-pane>
-            <a-tab-pane tab="信用记录" key="3" v-if="userInfo.userType=='Client'">
+            <a-tab-pane tab="信用记录" key="3" v-if="userInfo.userType === 'Client'">
                 <a-table
                         :columns="columns2"
                         :dataSource="creditList"
@@ -290,7 +297,7 @@
                     console.log('上传成功');
                     console.log(res.res.requestUrls[0]);
                     let url = res.res.requestUrls[0];
-                    url = url.substr(0, url.indexOf('?'));
+                    //url = url.substr(0, url.indexOf('?'));
                     console.log("url:" + url);
                     const data = {
                         avatarUrl: url,
@@ -384,10 +391,17 @@
     }
 </style>
 <style lang="less">
+    .avatar-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 350px;
+        margin-top: 30px;
+    }
     .avatar {
-        width: 35px;
-        height: 35px;
+        width: 70px;
+        height: 70px;
         border-radius: 50%;
-        margin-left: 100px;
     }
 </style>

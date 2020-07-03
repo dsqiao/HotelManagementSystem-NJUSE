@@ -45,7 +45,7 @@ public interface HotelService {
      * @param InDate 入住时间
      * @param OutDate 退房时间
      */
-   List<HotelVO> searchHotels(String address, String hotelName, String bizRegion, Integer  lowStar, Integer highStar, Integer rooms, Integer roomType, Double lowPrice,Double highPrice,String InDate, String OutDate)throws ServiceException;
+    List<HotelVO> searchHotels(String address, String hotelName, String bizRegion, Integer  lowStar, Integer highStar, Integer rooms, Integer roomType, Double lowPrice,Double highPrice,String InDate, String OutDate)throws ServiceException;
 
 
     /**
@@ -82,11 +82,17 @@ public interface HotelService {
     List<HotelVO> sortByScore(List<HotelVO> hotelList);
 
 
-
-
+    /**
+     * 删除酒店
+     * @param hotelId
+     */
     void deleteHotel(Integer hotelId);
 
-
+    /**
+     * 得到某管理员管理的酒店列表
+     * @param managerId
+     * @return
+     */
     List<HotelVO> getHotelListByManagerId(Integer managerId);
 
 }
