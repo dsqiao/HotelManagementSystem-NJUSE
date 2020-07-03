@@ -27,4 +27,6 @@ public interface HotelMapper {
 
     int updateRate(@Param("id") Integer id,@Param("evaluatePeople") Integer evaluatePeople,@Param("rate") double rate);
 
+    int deleteHotel(@Param("id") Integer id);
+
 }

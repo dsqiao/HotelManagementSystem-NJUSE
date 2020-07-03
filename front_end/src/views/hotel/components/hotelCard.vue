@@ -2,7 +2,7 @@
   <a-card hoverable class="hotelCard ant-col-xs-7 ant-col-lg-5 ant-col-xxl-3">
     <img
       alt="example"
-      :src="baseUrl+logoData[hotel.name]+'.jpg'"
+      :src="baseUrl+hotel.name+'.jpg'"
       slot="cover"
       referrerPolicy="no-referrer"
     />

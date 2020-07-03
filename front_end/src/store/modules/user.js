@@ -37,11 +37,11 @@ const user = {
     mutations: {
         reset_state: function(state) {
             state.token = '',
-            state.userId = '',
-            state.userInfo = {
-                
-            },
-            state.userOrderList = []
+                state.userId = '',
+                state.userInfo = {
+
+                },
+                state.userOrderList = []
         },
         set_token: function(state, token){
             state.token = token
@@ -69,6 +69,9 @@ const user = {
         },
         set_currentOrder: function (state, data) {
             state.currentOrder = data;
+        },
+        set_avatarUrl: function(state, data) {
+            state.userInfo.avatarUrl = data;
         }
     },
 
@@ -93,30 +96,47 @@ const user = {
         },
         getUserInfo({ state, commit }) {
             return new Promise((resolve, reject) => {
-              getUserInfoAPI(state.userId).then(response => {
-                const data = response
-                if (!data) {
-                  reject('登录已过期，请重新登录')
-                }
-                commit('set_userInfo', data)
-                commit('set_userId', data.id)
-                resolve(data)
-              }).catch(error => {
-                reject(error)
-              })
+                getUserInfoAPI(state.userId).then(response => {
+                    const data = response
+                    if (!data) {
+                        reject('登录已过期，请重新登录')
+                    }
+                    commit('set_userInfo', data)
+                    commit('set_userId', data.id)
+                    resolve(data)
+                }).catch(error => {
+                    reject(error)
+                })
             })
         },
         updateUserInfo: async({ state, dispatch }, data) => {
             const params = {
                 id: state.userId,
+                avatarUrl: user.avatarUrl,
                 ...data,
-            }
+            };
             const res = await updateUserInfoAPI(params)
             if(res){
                 message.success('修改成功')
                 dispatch('getUserInfo')
             }
         },
+        updateAvatarUrl: async ({ state, dispatch}, data) => {
+            const params = {
+                id: state.userId,
+                userName: state.userName,
+                email: state.email,
+                phoneNumber: state.phoneNumber,
+                password: state.password,
+                ...data,
+            };
+            const res = await updateUserInfoAPI(params)
+            if(res){
+                message.success('修改成功')
+                dispatch('getUserInfo')
+            }
+        },
+
         beMember: async ({state, commit}, data) => {
             const params = {
                 id: state.userId,
@@ -152,7 +172,7 @@ const user = {
             resetRouter()
             commit('reset_state')
         },
-          // remove token
+        // remove token
         resetToken({ commit }) {
             return new Promise(resolve => {
                 removeToken() // must remove  token  first

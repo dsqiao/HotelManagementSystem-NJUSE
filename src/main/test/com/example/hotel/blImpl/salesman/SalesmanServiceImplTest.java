@@ -33,6 +33,9 @@ class SalesmanServiceImplTest {
     SalesmanMapper salesmanMapper;
 
     @Test
+    /**
+     * 单元测试：获取用户信息列表（共3个用户）
+     */
     void getAllUser() {
         User c1 = new User();
         c1.setEmail("m1@qq.com");
@@ -71,6 +74,10 @@ class SalesmanServiceImplTest {
         adminService.deleteUser(newAdd3.getId());
     }
 
+
+    /**
+     * 功能测试：用户信用充值
+     */
     @Test
     void recharge() {
         User user = new User();

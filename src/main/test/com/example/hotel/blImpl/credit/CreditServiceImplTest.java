@@ -25,7 +25,7 @@ class CreditServiceImplTest {
 
     @Test
     /**
-     * 初始化
+     *
      */
     void getUserCreditTest1() {
         List<CreditVO> creditList=creditService.getUserCredit(4);

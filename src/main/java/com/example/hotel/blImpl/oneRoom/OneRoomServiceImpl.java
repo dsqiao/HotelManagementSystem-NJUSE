@@ -128,7 +128,8 @@ public class OneRoomServiceImpl implements OneRoomService {
             if(checkInDate.compareTo(t1)==0 ||
                     checkInDate.compareTo(t1)*checkInDate.compareTo(t2)<0 ||
                     checkOutDate.compareTo(t2)==0 ||
-                    checkOutDate.compareTo(t1)*checkOutDate.compareTo(t2)<0) return false;
+                    checkOutDate.compareTo(t1)*checkOutDate.compareTo(t2)<0||
+                    (checkInDate.compareTo(t1)<0&&checkOutDate.compareTo(t2)>0)) return false;
         }
         return true;
     }

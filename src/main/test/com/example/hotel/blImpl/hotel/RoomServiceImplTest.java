@@ -39,6 +39,10 @@ class RoomServiceImplTest {
     void tearDown() {
     }
 
+
+    /**
+     * 单元测试：展现酒店房间细节
+     */
     @org.junit.jupiter.api.Test
     void retrieveHotelRoomInfo() {
         List<HotelRoom> hotelRoomList1=roomService.retrieveHotelRoomInfo(1);
@@ -54,6 +58,10 @@ class RoomServiceImplTest {
         }
     }
 
+
+    /**
+     * 功能测似：工作人员录入房间
+     */
     @org.junit.jupiter.api.Test
     void insertRoomInfo() {
         HotelRoom hotelRoom=new HotelRoom();
@@ -64,14 +72,10 @@ class RoomServiceImplTest {
         assertEquals(before.size()+1,after.size());
     }
 
-    @Test
-    void updateRestRooms() {
-
-    }
 
     @Test
     /**
-     * 开始日期与入住时期相同
+     * 单元测似：检查时间冲突（开始日期与入住时期相同）
      */
     void checkIsConflicted1() {
         OneRoom oneRoom=new OneRoom();
@@ -89,7 +93,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 结束日期与退房时期相同
+     * 单元测试：检查时间冲突（结束日期与退房时期相同）
      */
     void checkIsConflicted2() {
         OneRoom oneRoom=new OneRoom();
@@ -106,7 +110,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 开始日期在退房日期之后
+     * 单元测试：（开始日期在退房日期之后）
      */
     void checkIsConflicted3() {
         OneRoom oneRoom=new OneRoom();
@@ -123,7 +127,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 结束日期在入住日期之前
+     * 单元测试（结束日期在入住日期之前）
      */
     void checkIsConflicted4() {
         OneRoom oneRoom=new OneRoom();
@@ -140,7 +144,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 只有开始日期介于入住和退房日期之间
+     * 单元测试（只有开始日期介于入住和退房日期之间）
      */
     void checkIsConflicted5() {
         OneRoom oneRoom=new OneRoom();
@@ -157,7 +161,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 只有结束日期介于入住和退房之间
+     * 单元测试：检查时间冲突（只有结束日期介于入住和退房之间）
      */
     void checkIsConflicted6() {
         OneRoom oneRoom=new OneRoom();
@@ -174,7 +178,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 开始日期和结束日期都介于入住和退房之间
+     * 单元测试：检查时间冲突（开始日期和结束日期都介于入住和退房之间）
      */
     void checkIsConflicted7() {
         OneRoom oneRoom=new OneRoom();
@@ -191,7 +195,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 开始日期和退房时间相同
+     * 单元测试：检查时间冲突（开始日期和退房时间相同）
      */
     void checkIsConflicted8() {
         OneRoom oneRoom=new OneRoom();
@@ -208,7 +212,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 结束日期和入住时间相同
+     * 单元测试：检查时间冲突（结束日期和入住时间相同）
      */
     void checkIsConflicted9() {
         OneRoom oneRoom=new OneRoom();

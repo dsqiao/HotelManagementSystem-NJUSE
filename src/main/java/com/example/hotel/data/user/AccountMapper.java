@@ -37,13 +37,14 @@ public interface AccountMapper {
      * @param phonenumber
      * @return
      */
-     int updateAccount(
-             @Param("id") int id,
-             @Param("password") String password,
-             @Param("userName") String username,
-             @Param("email") String email,
-             @Param("phoneNumber") String phonenumber
-     );
+    int updateAccount(
+            @Param("id") int id,
+            @Param("password") String password,
+            @Param("userName") String username,
+            @Param("email") String email,
+            @Param("phoneNumber") String phonenumber,
+            @Param("avatarUrl") String avatarUrl
+    );
 
      int beMember(@Param("id") int id, @Param("memberType") String memberType, @Param("birthday") String birthday, @Param("companyName") String companyName);
 

@@ -38,7 +38,7 @@ public interface AccountService {
      * @param phonenumber
      * @return
      */
-    ResponseVO updateUserInfo(int id, String password, String username, String email, String phonenumber);
+    ResponseVO updateUserInfo(int id, String password, String username, String email, String phonenumber, String avatarUrl);
 
     ResponseVO beMember(int id, String memberType, String birthday, String companyName);
 
