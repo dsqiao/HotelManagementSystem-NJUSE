@@ -1,6 +1,6 @@
 <template>
     <div>
-      <a-radio-group default-value="default" button-style="solid" @change="handleSortChange" size="small">
+      <a-radio-group default-value="default" button-style="solid" @change="handleSortChange" size="medium">
         <a-radio-button class="button" value="default" >
           默认排序
         </a-radio-button>
@@ -34,22 +34,22 @@ export default {
         handleSortChange(event){
             const type=event.target.value;
             const data=this.hotelList;
-            if(type=="default"){
+            if(type === "default"){
                 this.sortByDefault({
                   userId:Number(this.userId)
                 });
             }
-            else if(type=="evaluatePeople"){
+            else if(type === "evaluatePeople"){
                 this.sortByEvaluatePeople({
                   userId:Number(this.userId)
                 });
             }
-            else if(type=="score"){
+            else if(type === "score"){
                 this.sortByScore({
                   userId:Number(this.userId)
                 });
             }
-            else if(type=="star"){
+            else if(type === "star"){
                 this.sortByStar({
                   userId:Number(this.userId)
                 });
@@ -60,6 +60,7 @@ export default {
 </script>
 <style scoped lang="less">
     .button{
-        margin-left:15px
+        margin-left:15px;
+        border-radius: 6px;
     }
 </style>
