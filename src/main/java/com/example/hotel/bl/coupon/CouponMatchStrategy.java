@@ -5,7 +5,12 @@ import com.example.hotel.po.Coupon;
 import com.example.hotel.vo.OrderVO;
 
 public interface CouponMatchStrategy {
-
+    /**
+     * 检查命令与对应coupon是否匹配
+     * @param orderVO
+     * @param coupon
+     * @return
+     */
     boolean isMatch(OrderVO orderVO, Coupon coupon);
 
 }

@@ -24,10 +24,10 @@ public interface CouponService {
      * 获得四种类型的网站优惠
      * @return
      */
-    List<Coupon> getWebsiteCoupon1List();
-    List<Coupon> getWebsiteCoupon2List();
-    List<Coupon> getWebsiteCoupon3List();
-    List<Coupon> getWebsiteCoupon4List();
+    List<Coupon> getWebsiteCoupon1List();//生日
+    List<Coupon> getWebsiteCoupon2List();//多间
+    List<Coupon> getWebsiteCoupon3List();//满减
+    List<Coupon> getWebsiteCoupon4List();//限时
 
     /**
      * 删除该酒店所有优惠策略
@@ -43,21 +43,21 @@ public interface CouponService {
     CouponVO addHotelTargetMoneyCoupon(HotelTargetMoneyCouponVO couponVO);
 
     /**
-     * *
+     * 添加酒店限时策略
      * @param couponVO
      * @return
      */
     CouponVO addTimeCoupon(TimeCouponVO couponVO);
 
     /**
-     *
+     *添加酒店多间优惠策略
      * @param couponVO
      * @return
      */
     CouponVO addMultipleCoupon(MultipleCouponVO couponVO);
 
     /**
-     *
+     *添加生日特惠
      * @param couponVO
      * @return
      */

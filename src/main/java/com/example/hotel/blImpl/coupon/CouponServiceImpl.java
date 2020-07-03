@@ -27,6 +27,14 @@ public class CouponServiceImpl implements CouponService {
 
     private static List<CouponMatchStrategy> strategyList = new ArrayList<>();
 
+    /**
+     * 添加多种策略到strategylist中
+     * @param targetMoneyCouponStrategy
+     * @param multipleRoomStrategy
+     * @param timeCouponStrategy
+     * @param birthCouponStrategy
+     * @param couponMapper
+     */
     @Autowired
     public CouponServiceImpl(TargetMoneyCouponStrategyImpl targetMoneyCouponStrategy,
                              MultipleRoomStrategylmpl multipleRoomStrategy,
@@ -45,7 +53,11 @@ public class CouponServiceImpl implements CouponService {
     }
 
 
-
+    /**
+     * 得到与改订单匹配的最好的优惠策略
+     * @param orderVO
+     * @return
+     */
     @Override
     public List<Coupon> getMatchOrderCoupon(OrderVO orderVO) {
 
