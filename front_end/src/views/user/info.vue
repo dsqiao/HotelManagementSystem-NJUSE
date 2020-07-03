@@ -297,7 +297,7 @@
                     console.log('上传成功');
                     console.log(res.res.requestUrls[0]);
                     let url = res.res.requestUrls[0];
-                    url = url.substr(0, url.indexOf('?'));
+                    //url = url.substr(0, url.indexOf('?'));
                     console.log("url:" + url);
                     const data = {
                         avatarUrl: url,

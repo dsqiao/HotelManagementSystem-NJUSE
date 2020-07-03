@@ -20,7 +20,21 @@ public interface RoomService {
      */
     void insertRoomInfo(HotelRoom hotelRoom);
 
-
+    /**
+     * 更新剩余房间数目
+     * @param hotelId
+     * @param checkInDate
+     * @param checkOutDate
+     * @return
+     */
     List<HotelRoom> updateRestRooms(int hotelId,String checkInDate,String checkOutDate);
+
+    /**
+     * 检查房间是否被占用
+     * @param checkInStr
+     * @param checkOutStr
+     * @param oneRoom
+     * @return
+     */
     boolean checkIsConflicted(String checkInStr, String checkOutStr, OneRoom oneRoom);
 }

@@ -13,5 +13,10 @@ public interface SalesmanService {
      */
     List<User> getAllUser();
 
+    /**
+     * 充值信用
+     * @param rechargeUser
+     * @return
+     */
     ResponseVO recharge(RechargeUser rechargeUser);
 }

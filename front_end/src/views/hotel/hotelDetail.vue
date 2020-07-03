@@ -120,6 +120,9 @@ export default {
 <style scoped lang="less">
     .hotelDetailCard {
         padding: 50px 50px;
+        img {
+            height: 250px;
+        }
     }
     .hotel-info {
         display: flex;
