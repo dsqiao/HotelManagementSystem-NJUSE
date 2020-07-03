@@ -5,6 +5,7 @@ import com.example.hotel.bl.hotel.HotelService;
 import com.example.hotel.bl.oneRoom.OneRoomService;
 import com.example.hotel.bl.order.OrderService;
 import com.example.hotel.bl.user.AccountService;
+import com.example.hotel.data.hotel.OneRoomMapper;
 import com.example.hotel.data.hotel.RoomMapper;
 import com.example.hotel.data.order.OrderMapper;
 import com.example.hotel.data.user.AccountMapper;
@@ -54,6 +55,8 @@ public class OrderServiceImpl implements OrderService {
     RoomMapper roomMapper;
     @Autowired
     OneRoomService oneRoomService;
+    @Autowired
+    OneRoomMapper oneRoomMapper;
 
     @Override
     public ResponseVO addOrder(OrderVO orderVO) {
@@ -106,6 +109,8 @@ public class OrderServiceImpl implements OrderService {
             if(hours<=6){
                 thisUser.setCredit(thisUser.getCredit()-thisOrder.getPrice()/2);
             }
+            oneRoomMapper.deleteRoomInfo(thisOrder.getId());
+            orderMapper.updateOrderState(orderid,thisOrder.getOrderState());
             orderMapper.updateOrderState(orderid,thisOrder.getOrderState());//更新订单状态
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -126,7 +131,7 @@ public class OrderServiceImpl implements OrderService {
         Order order=orderMapper.getOrderById(orderId);
         User user=accountService.getUserInfo(order.getUserId());
         double change=order.getPrice()*0.01;
-        creditService.updateCredit(user.getId(),action,change,user.getCredit());//更新信用值
+        creditService.updateCredit(user.getId(),action,change,user.getCredit());
         return ResponseVO.buildSuccess(orderMapper.updateOrderState(orderId,orderState));
     }
 
@@ -135,7 +140,7 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders=new ArrayList<>();
         if(type.equals("user")) orders=getUserOrders(userId);
         else if(type.equals("hotelManager")) orders=getManagedOrders(userId);
-        updateOverTimeOrders(orders);//更新是否发生异常
+        updateOverTimeOrders(orders);
         return orders;
     }
 
