@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
             if(hours<=6){
                 thisUser.setCredit(thisUser.getCredit()-thisOrder.getPrice()/2);
             }
-            orderMapper.updateOrderState(orderid,thisOrder.getOrderState());
+            orderMapper.updateOrderState(orderid,thisOrder.getOrderState());//更新订单状态
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure("撤销失败");
@@ -126,7 +126,7 @@ public class OrderServiceImpl implements OrderService {
         Order order=orderMapper.getOrderById(orderId);
         User user=accountService.getUserInfo(order.getUserId());
         double change=order.getPrice()*0.01;
-        creditService.updateCredit(user.getId(),action,change,user.getCredit());
+        creditService.updateCredit(user.getId(),action,change,user.getCredit());//更新信用值
         return ResponseVO.buildSuccess(orderMapper.updateOrderState(orderId,orderState));
     }
 
@@ -135,7 +135,7 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders=new ArrayList<>();
         if(type.equals("user")) orders=getUserOrders(userId);
         else if(type.equals("hotelManager")) orders=getManagedOrders(userId);
-        updateOverTimeOrders(orders);
+        updateOverTimeOrders(orders);//更新是否发生异常
         return orders;
     }
 
@@ -162,12 +162,12 @@ public class OrderServiceImpl implements OrderService {
             if(latest.compareTo(current)<0&&Orders.get(i).getOrderState().equals("已预订")){
                 String orderState="异常";
                 Orders.get(i).setOrderState(orderState);
-                orderMapper.updateOrderState(Orders.get(i).getId(),orderState);
+                orderMapper.updateOrderState(Orders.get(i).getId(),orderState);//订单状态更新
                 int userId=Orders.get(i).getUserId();
                 String action="订单异常";
                 User user=accountService.getUserInfo(userId);
                 double change=Orders.get(i).getPrice()*0.01;
-                creditService.updateCredit(userId,action,change,user.getCredit());
+                creditService.updateCredit(userId,action,change,user.getCredit());//信用值更新
             }
         }
     }

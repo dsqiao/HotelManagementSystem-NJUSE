@@ -56,7 +56,7 @@ public class RoomServiceImpl implements RoomService {
             String roomType=poToVo.get(hotelRoom.getRoomType().toString());
             List<OneRoom> using=oneRoomMapper.getUsingRooms(hotelId,roomType);
             for(int j=0;j<using.size();++j){
-                if(checkIsConflicted(checkInDate,checkOutDate,using.get(j))){
+                if(checkIsConflicted(checkInDate,checkOutDate,using.get(j))){//判断是否该时间段房间被占用
                     if(rest==0) break;
                     rest--;
                 }
