@@ -15,6 +15,8 @@ public class User {
     private String memberType;
     private String birthday; // 生日（普通会员才有）
     private String companyName; // 企业名称（企业会员才有）
+    private String avatarUrl;
+
 
     public Integer getId() {
         return id;
@@ -94,5 +96,13 @@ public class User {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getAvatarUrl(){
+        return avatarUrl;
     }
 }

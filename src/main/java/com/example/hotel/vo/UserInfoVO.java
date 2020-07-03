@@ -10,6 +10,7 @@ public class UserInfoVO {
     private String password;
     private String userName;
     private String phoneNumber;
+    private String avatarUrl;
 
 
     public String getPassword() {
@@ -44,4 +45,9 @@ public class UserInfoVO {
         return email;
     }
 
+    public String getAvatarUrl() { return avatarUrl; }
+
+    public void setAvatarUrl(String url) {
+        this.avatarUrl = url;
+    }
 }

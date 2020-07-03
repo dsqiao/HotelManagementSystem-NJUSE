@@ -48,7 +48,9 @@ public class AccountController {
                 userInfoVO.getPassword(),
                 userInfoVO.getUserName(),
                 userInfoVO.getEmail(),
-                userInfoVO.getPhoneNumber());
+                userInfoVO.getPhoneNumber(),
+                userInfoVO.getAvatarUrl()
+        );
     }
 
     @PostMapping("/{id}/userInfo/beMember")
