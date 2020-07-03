@@ -1,14 +1,6 @@
 package com.example.hotel.bl.hotel;
 
-import com.example.hotel.enums.BizRegion;
-import com.example.hotel.enums.HotelStar;
-import com.example.hotel.enums.RoomType;
-import com.example.hotel.enums.BizRegion;
-import com.example.hotel.po.Hotel;
-import com.example.hotel.po.HotelRoom;
-import com.example.hotel.po.Order;
 import com.example.hotel.util.ServiceException;
-import com.example.hotel.vo.CouponVO;
 import com.example.hotel.vo.HotelVO;
 
 import java.util.List;

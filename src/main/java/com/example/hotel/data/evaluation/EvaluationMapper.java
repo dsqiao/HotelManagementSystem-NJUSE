@@ -2,7 +2,6 @@ package com.example.hotel.data.evaluation;
 
 
 import com.example.hotel.po.Evaluation;
-import com.example.hotel.vo.EvaluationVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

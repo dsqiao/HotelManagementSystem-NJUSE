@@ -9,7 +9,6 @@ import com.example.hotel.po.OneRoom;
 import com.example.hotel.vo.OneRoomVO;
 import com.example.hotel.vo.OrderVO;
 import com.example.hotel.vo.ResponseVO;
-import org.apache.ibatis.annotations.One;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

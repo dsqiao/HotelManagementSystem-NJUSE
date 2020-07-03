@@ -1,6 +1,5 @@
 package com.example.hotel.data.hotel;
 
-import com.example.hotel.enums.BizRegion;
 import com.example.hotel.po.Hotel;
 import com.example.hotel.vo.HotelVO;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,7 +1,6 @@
 package com.example.hotel.blImpl.evaluation;
 
 import com.example.hotel.bl.evaluation.EvaluationService;
-import com.example.hotel.bl.hotel.HotelService;
 import com.example.hotel.data.evaluation.EvaluationMapper;
 import com.example.hotel.data.hotel.HotelMapper;
 import com.example.hotel.po.Evaluation;

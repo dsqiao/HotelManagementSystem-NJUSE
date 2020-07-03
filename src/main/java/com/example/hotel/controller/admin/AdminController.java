@@ -1,7 +1,6 @@
 package com.example.hotel.controller.admin;
 
 import com.example.hotel.bl.admin.AdminService;
-import com.example.hotel.blImpl.admin.AdminServiceImpl;
 import com.example.hotel.vo.ResponseVO;
 import com.example.hotel.vo.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;

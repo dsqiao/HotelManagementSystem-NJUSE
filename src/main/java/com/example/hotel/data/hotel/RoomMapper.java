@@ -1,10 +1,8 @@
 package com.example.hotel.data.hotel;
 
-import com.example.hotel.po.Hotel;
 import com.example.hotel.po.HotelRoom;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

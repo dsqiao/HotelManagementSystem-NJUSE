@@ -6,7 +6,6 @@ import com.example.hotel.data.hotel.RoomMapper;
 import com.example.hotel.data.order.OrderMapper;
 import com.example.hotel.po.HotelRoom;
 import com.example.hotel.po.OneRoom;
-import com.example.hotel.po.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

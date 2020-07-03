@@ -1,6 +1,5 @@
 package com.example.hotel.data.hotel;
 
-import com.example.hotel.po.HotelRoom;
 import com.example.hotel.po.OneRoom;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
