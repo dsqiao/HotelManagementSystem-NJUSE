@@ -35,7 +35,7 @@
                         />
                         <span v-else>{{ userInfo.phoneNumber}}</span>
                     </a-form-item>
-                    <a-form-item label="信用值" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }">
+                    <a-form-item label="信用值" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }" v-if="userInfo.userType === 'Client'">
                         <span>{{ userInfo.credit }}</span>
                     </a-form-item>
                     <a-form-item label="会员等级" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1}">
