@@ -109,11 +109,9 @@ export default {
     },
     onStart(date,dateString){
       this.set_startDate(dateString)
-      this.today=dateString
     },
     onEnd(date,dateString){
       this.set_endDate(dateString);
-      this.end=dateString
     }
   }
 };

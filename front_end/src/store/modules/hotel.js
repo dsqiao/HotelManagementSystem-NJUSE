@@ -72,7 +72,7 @@ const hotel = {
         datePickVisible:false,
 
         startDate:moment().format("YYYY-MM-DD"),
-        endDate:moment(new Date()).add(1,'months').format("YYYY-MM-DD")
+        endDate:moment(new Date()).add(1,'weeks').format("YYYY-MM-DD")
     },
     mutations: {
         set_hotelList: function(state, data) {
