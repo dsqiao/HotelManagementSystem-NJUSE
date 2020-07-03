@@ -9,6 +9,9 @@ import com.example.hotel.po.OneRoom;
 import com.example.hotel.po.Order;
 import com.example.hotel.vo.OrderVO;
 import org.apache.ibatis.annotations.Param;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +19,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -24,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = HotelApplication.class)
-
 class OrderServiceImplTest {
 
     @Autowired
@@ -34,8 +35,12 @@ class OrderServiceImplTest {
 
 
 
-    @Test
-    public void addOrder() {
+
+    /**
+     * 功能测试：添加单个订单
+     */
+    @org.junit.jupiter.api.Test
+    void addOrder() {
         OrderVO orderVO=new OrderVO();
         orderVO.setCheckInDate("2020-07-01 12:00:00");
         orderVO.setCheckOutDate("2020-07-25 12:00:00");
@@ -57,31 +62,46 @@ class OrderServiceImplTest {
         assertEquals("2020-07-25 12:00:00",newAdd.getCheckOutDate());
     }
 
-    @Test
+
+    /**
+     *  功能测试：删除订单
+     */
+    @org.junit.jupiter.api.Test
+
     public void annulOrder() {
         List<Order> order=orderMapper.getAllOrders();
         Order newAdd=order.get(order.size()-1);
         int orderid=newAdd.getId();
         orderService.annulOrder(orderid);
-        assertEquals("已撤销",newAdd.getOrderState());
+        assertEquals("已撤销",orderMapper.getAllOrders().get(orderMapper.getAllOrders().size()-1).getOrderState());
     }
 
-    @Test
+
+    /**
+     * 单元测试：执行订单
+     */
+    @org.junit.jupiter.api.Test
+
     public void executeOrder() {
         List<Order> order=orderMapper.getAllOrders();
         Order newAdd=order.get(order.size()-1);
         int orderid=newAdd.getId();
-        orderService.annulOrder(orderid);
-        assertEquals("已入住",newAdd.getOrderState());
+        orderService.executeOrder(orderid);
+        assertEquals("已入住",orderMapper.getAllOrders().get(orderMapper.getAllOrders().size()-1).getOrderState());
 
     }
 
-    @Test
+
+    /**
+     * 单元测试：用户退房
+     */
+    @org.junit.jupiter.api.Test
+
     public void checkOutOrder() {
         List<Order> order=orderMapper.getAllOrders();
         Order newAdd=order.get(order.size()-1);
         int orderid=newAdd.getId();
-        orderService.annulOrder(orderid);
-        assertEquals("已退房",newAdd.getOrderState());
+        orderService.checkOutOrder(orderid);
+        assertEquals("已退房",orderMapper.getAllOrders().get(orderMapper.getAllOrders().size()-1).getOrderState());
     }
 }

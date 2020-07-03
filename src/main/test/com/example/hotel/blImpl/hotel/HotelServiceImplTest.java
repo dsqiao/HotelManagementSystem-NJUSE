@@ -7,6 +7,9 @@ import com.example.hotel.vo.HotelVO;
 import com.example.hotel.vo.OrderVO;
 import org.apache.catalina.User;
 import org.apache.catalina.filters.ExpiresFilter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +25,22 @@ class HotelServiceImplTest {
     HotelServiceImpl hotelService;
     @Autowired
     HotelMapper hotelMapper;
+
+
+    @BeforeEach
+    void setUp() {
+
+    }
+
+    @AfterEach
+    void tearDown() {
+
+    }
+
     @Test
+    /**
+     * 功能测试：添加酒店（添加一个酒店）
+     */
     void addHotel() throws ServiceException {
         HotelVO hotelVO=new HotelVO();
         hotelVO.setAddress("北京朝阳区");
@@ -37,19 +55,24 @@ class HotelServiceImplTest {
         hotelService.addHotel(hotelVO);
         int size2=hotelService.retrieveHotels().size();
         assertEquals(size1,size2-1);
-
     }
 
+
+    /**
+     * 单元测试：获取所有酒店的列表
+     */
     @Test
     void retrieveHotels() {
         List<HotelVO> hotelVOS=hotelMapper.selectAllHotel();
         assertEquals(hotelVOS.size(),hotelService.retrieveHotels().size());
     }
 
+
+    /**
+     * 单元测试：获取单个酒店的细节信息
+     */
     @Test
     void retrieveHotelDetails() {
-
-
         HotelVO hotelVO=hotelService.retrieveHotelDetails(1);
         assertEquals(hotelVO.getAddress(),"上海市虹口区四川北路1688号");
         assertEquals(hotelVO.getBizRegion(),"XiDan");
@@ -59,9 +82,13 @@ class HotelServiceImplTest {
         assertEquals(hotelVO.getHotelStar(), "Four");
         assertTrue(hotelVO.getRate()==4.80);
         assertEquals(hotelVO.getEvaluatePeople(),1);
-
     }
 
+
+    /**
+     * 功能测试：搜索酒店
+     * @throws ServiceException
+     */
     @Test
     void searchHotels() throws ServiceException {
        List<HotelVO> hotelVOS=hotelService.searchHotels("南京","null","WanDa",1,5,3,4,0.0,500.0,"2020-07-01 12:00:00","2020-07-15 12:00:00" );
@@ -72,7 +99,9 @@ class HotelServiceImplTest {
     }
 
 
-
+    /**
+     * 集成测试：根据条件筛选酒店（地址、商圈、是否预订）
+     */
     @Test
     void getHotelByCondition() {
         List<HotelVO> hotelVOs=hotelService.getHotelByCondition("XiDan","上海",true,5);
@@ -81,6 +110,10 @@ class HotelServiceImplTest {
         }
     }
 
+
+    /**
+     * 单元测试：根据地址和商圈筛选酒店
+     */
     @Test
     void getHotelByBizRegionAndAddress() {
         List<HotelVO> hotelVOs=hotelService.getHotelByBizRegionAndAddress("WanDa","南京");
@@ -88,6 +121,10 @@ class HotelServiceImplTest {
             assertEquals(hotelVOs.get(1).getName(),"格林豪泰酒店");
     }
 
+
+    /**
+     * 单元测试：按酒店评价人数降序排序
+     */
     @Test
     void sortByEvaluationPeople() {
         List<HotelVO> hotelVOs=hotelService.retrieveHotels();
@@ -95,9 +132,12 @@ class HotelServiceImplTest {
         for(int i=0;i<hotelVOs.size()-1;i++){
             assertTrue(hotelVOs.get(i).getEvaluatePeople()>=hotelVOs.get(i+1).getEvaluatePeople());
         }
-
     }
 
+
+    /**
+     * 单元测试：按酒店星级降序排序
+     */
     @Test
     void sortByStar() {
         List<HotelVO> hotelVOs=hotelService.retrieveHotels();
@@ -112,6 +152,10 @@ class HotelServiceImplTest {
         }
     }
 
+
+    /**
+     * 单元测试：按酒店评分降序排序
+     */
     @Test
     void sortByScore() {
         List<HotelVO> hotelVOs=hotelService.retrieveHotels();
@@ -122,6 +166,11 @@ class HotelServiceImplTest {
         }
     }
 
+
+    /**
+     * 功能测试：管理员删除酒店
+     * @throws ServiceException
+     */
     @Test
     void deleteHotel() throws ServiceException {
         addHotel();
@@ -131,6 +180,10 @@ class HotelServiceImplTest {
         assertEquals(size1-1,size2);
     }
 
+
+    /**
+     * 单元测试：根据管理员Id获取酒店列表
+     */
     @Test
     void getHotelListByManagerId() {
         List<HotelVO> hotelVOS=hotelService.getHotelListByManagerId(8);

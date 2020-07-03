@@ -62,9 +62,12 @@ class OneRoomServiceImplTest {
             orderMapper.annulOrder(orders.get(i).getId());
             oneRoomService.checkOutRooms(orders.get(i).getId());
         }
-
     }
 
+
+    /**
+     * 功能测试：用户退房（订单号为Setup中的订单）
+     */
     @Test
     void checkOutRooms() {
         int before=oneRoomService.getAllRooms().size();
@@ -81,6 +84,7 @@ class OneRoomServiceImplTest {
 
     @Test
     /**
+     * 集成测试：检查预订房间及订单生成后的房间号分配情况
      * 分配两个家庭房，三个大床房，剩余数量足够，无冲突
      */
     void getDistributedRoomsTest1() {
@@ -99,6 +103,7 @@ class OneRoomServiceImplTest {
 
     @Test
     /**
+     * 集成测试：检查预订房间及订单生成后的房间号分配情况
      * 分配两个家庭房，十一个大床房，超过剩余数量且时间冲突
      */
     void getDistributedRoomsTest2() {
@@ -148,6 +153,7 @@ class OneRoomServiceImplTest {
 
     @Test
     /**
+     * 集成测试：检查预订房间及订单生成后的房间号分配情况
      * 分配两个家庭房，十一个大床房，超过剩余数量，但时间未冲突
      */
     void getDistributedRoomsTest3() {
@@ -198,6 +204,7 @@ class OneRoomServiceImplTest {
 
     @Test
     /**
+     * 集成测试：检查预订房间及订单生成后的房间号分配情况
      * 分配两个家庭房，三个大床房，三个总统套房，一个双床房
      */
     void getDistributedRoomsTest5() {
@@ -238,6 +245,7 @@ class OneRoomServiceImplTest {
 
     @Test
     /**
+     * 集成测试：检查预订房间及订单生成后的房间号分配情况
      * 分配两个家庭房，十个大床房，刚好无剩余房间
      */
     void getDistributedRoomsTest4() {
