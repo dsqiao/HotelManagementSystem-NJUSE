@@ -5,6 +5,7 @@ import com.example.hotel.bl.hotel.HotelService;
 import com.example.hotel.bl.oneRoom.OneRoomService;
 import com.example.hotel.bl.order.OrderService;
 import com.example.hotel.bl.user.AccountService;
+import com.example.hotel.data.hotel.OneRoomMapper;
 import com.example.hotel.data.hotel.RoomMapper;
 import com.example.hotel.data.order.OrderMapper;
 import com.example.hotel.data.user.AccountMapper;
@@ -54,6 +55,8 @@ public class OrderServiceImpl implements OrderService {
     RoomMapper roomMapper;
     @Autowired
     OneRoomService oneRoomService;
+    @Autowired
+    OneRoomMapper oneRoomMapper;
 
     @Override
     public ResponseVO addOrder(OrderVO orderVO) {
@@ -106,6 +109,7 @@ public class OrderServiceImpl implements OrderService {
             if(hours<=6){
                 thisUser.setCredit(thisUser.getCredit()-thisOrder.getPrice()/2);
             }
+            oneRoomMapper.deleteRoomInfo(thisOrder.getId());
             orderMapper.updateOrderState(orderid,thisOrder.getOrderState());
         } catch (Exception e) {
             System.out.println(e.getMessage());
