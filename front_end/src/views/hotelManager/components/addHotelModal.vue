@@ -52,11 +52,22 @@
                     v-decorator="['description', { rules: [{ required: true, message: '请填写酒店简介' }] }]"
                 />
             </a-form-item>
+            <a-form-item label="上传图片" v-bind="formItemLayout">
+            <a-upload
+                    name="avatar"
+                    :show-upload-list="false"
+                    :before-upload="beforeUpload"
+            >
+                <a-button><a-icon type="upload"/></a-button>
+            </a-upload>
+            </a-form-item>
         </a-form>
+
     </a-modal>
 </template>
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import OSS from 'ali-oss';
 export default {
     name: 'addHotelModal',
     data() {
@@ -119,6 +130,35 @@ export default {
                 }
             });
         },
+        beforeUpload(file){
+            const isJpgOrPng=file.type==='image/jpeg'||file.type=='image/png';
+            if(!isJpgOrPng){
+                this.$message.error('仅支持jpg和png格式图片');
+                return false;
+            }
+            const isLt2M=file.size/1024/1024<2;
+            if(!isLt2M){
+                this.$message.error('图片尺寸过大，仅支持2MB以下的图片');
+                return  false;
+            }
+            this.file=file;
+            const Name=this.form.getFieldValue('hotelName');
+            const filename="Hotel/hotelLogo/"+Name+".jpg";
+            const client=new OSS({
+                region:'oss-cn-beijing',
+                accessKeyId:'LTAI4GHebNoRKcGPiwNZL4Kw',
+                accessKeySecret:'bTneTHVIbwMFazuPUSoVkLRbAeSwY6',
+                bucket:'orzorzorzorz',
+
+            });
+            client.multipartUpload(filename,this.file).then(res=>{
+                console.log('上传成功');
+            }).catch(error =>{
+                console.log('上传失败');
+            });
+            return  true;
+        },
+
     }
 }
 </script>
