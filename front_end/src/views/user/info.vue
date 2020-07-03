@@ -38,7 +38,7 @@
                     <a-form-item label="信用值" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }" v-if="userInfo.userType === 'Client'">
                         <span>{{ userInfo.credit }}</span>
                     </a-form-item>
-                    <a-form-item label="会员等级" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1}">
+                    <a-form-item label="会员等级" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1}" v-if="userInfo.userType === 'Client'">
                         <span>{{ userInfo.memberType }}</span>
                     </a-form-item>
                     <a-form-item label="出生日期" :label-col="{span:3}" :wrapper-col="{ span : 8, offset : 1}"
@@ -63,7 +63,7 @@
                             取消
                         </a-button>
                     </a-form-item>
-                    <a-form-item :wrapper-col="{ span: 12, offset: 0}" v-else>
+                    <a-form-item :wrapper-col="{ span: 12, offset: 1}" v-else>
                         <a-upload
                                 name="avatar"
                                 :show-upload-list="false"
