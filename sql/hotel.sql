@@ -163,11 +163,46 @@ VALUES (2, 199, 10,10, 1, 'PresidentBed'),
        (3, 299, 30,30, 1, 'DoubleBed'),
        (4, 399, 10,10, 1, 'Family'),
        (5, 122, 10,10, 1, 'BigBed'),
+
        (6, 399, 10,10, 2, 'Family'),
-       (7, 500, 3, 3,3, 'PresidentBed'),
-       (8, 158, 30,30, 4, 'DoubleBed'),
-       (9, 288, 15,15, 5, 'Family'),
-       (10, 388, 20,20, 6, 'DoubleBed');
+       (7, 588, 1, 1, 2, 'PresidentBed'),
+       (8, 158, 30, 30, 2, 'DoubleBed'),
+       (9, 288, 15, 15, 2, 'BigBed'),
+
+       (10, 599, 3, 3, 3, 'PresidentBed'),
+       (11, 288, 40, 40, 3, 'DoubleBed'),
+       (12, 399, 15, 15, 3, 'Family'),
+       (13, 288, 20, 20, 3, 'BigBed'),
+
+       (14, 399, 10,10, 4, 'Family'),
+       (15, 598, 2, 2, 4, 'PresidentBed'),
+       (16, 158, 30, 30, 4, 'DoubleBed'),
+       (17, 288, 15, 15, 4, 'BigBed'),
+
+       (18, 399, 10,10, 5, 'Family'),
+       (19, 500, 3, 3, 5, 'PresidentBed'),
+       (20, 158, 30, 30, 5, 'DoubleBed'),
+       (21, 288, 15, 15, 5, 'BigBed'),
+
+       (22, 299, 10,10, 6, 'Family'),
+       (23, 398, 1, 1, 6, 'PresidentBed'),
+       (24, 158, 30, 30, 6, 'DoubleBed'),
+       (25, 288, 10, 10, 6, 'BigBed'),
+
+       (26, 399, 10,10, 7, 'Family'),
+       (28, 158, 30, 30, 7, 'DoubleBed'),
+       (29, 288, 15, 15, 7, 'BigBed'),
+
+       (30, 399, 10,10, 8, 'Family'),
+       (31, 498, 2, 2, 8, 'PresidentBed'),
+       (32, 158, 30, 30, 8, 'DoubleBed'),
+       (33, 288, 15, 15, 8, 'BigBed'),
+
+       (34, 399, 10,10, 9, 'Family'),
+       (35, 588, 1, 1, 9, 'PresidentBed'),
+       (36, 158, 30, 30, 9, 'DoubleBed'),
+       (37, 288, 15, 15, 9, 'BigBed')
+
 /*!40000 ALTER TABLE `Room` ENABLE KEYS */;
 COMMIT;
 
