@@ -1,3 +1,4 @@
+<!--酒店细节展示-->
 <template>
   <div class="container">
     <a-card class="info" title="酒店图片">

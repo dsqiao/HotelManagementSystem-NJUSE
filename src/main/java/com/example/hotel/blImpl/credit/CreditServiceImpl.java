@@ -54,11 +54,11 @@ public class CreditServiceImpl implements CreditService {
             CreditVO currentVO=new CreditVO();
             currentVO.setUserId(current.getUserId());
             currentVO.setAction(current.getAction());
-            String signChange=current.getChange()>=0?"+":"-";
+            String signChange=current.getChange()>=0?"+":"-";//判断为增加还是减少
             currentVO.setChange(signChange+Math.abs(current.getChange()));
             String signCurrent=current.getCurrent()>=0?"":"-";
             currentVO.setCurrent(signCurrent+Math.abs(current.getCurrent()));
-            String time=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(current.getTime());
+            String time=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(current.getTime());//以固定形式改为string
             currentVO.setTime(time);
             creditVOList.add(currentVO);
         }
@@ -80,7 +80,7 @@ public class CreditServiceImpl implements CreditService {
         update(credit);
     }
 
-
+//处理信用值的加减
     private void handleChange(Credit credit,String action,double change,double current){
         if(addAction.contains(action)){
             credit.setChange(change);
@@ -92,7 +92,7 @@ public class CreditServiceImpl implements CreditService {
         }
     }
 
-
+//得到新的credit
     private void build(Credit credit, int userId, String action, double change, double current){
         credit.setUserId(userId);
         credit.setAction(action);
@@ -100,7 +100,7 @@ public class CreditServiceImpl implements CreditService {
         LocalDateTime localDateTime=LocalDateTime.now();
         credit.setTime(localDateTime);
     }
-
+//更新数据库
     private void update(Credit credit){
         creditMapper.updateCredit(credit);
         accountMapper.updateCredit(credit.getUserId(),credit.getCurrent());

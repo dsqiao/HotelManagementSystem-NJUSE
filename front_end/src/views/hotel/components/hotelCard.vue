@@ -1,3 +1,4 @@
+<!--酒店卡片-->
 <template>
   <a-card hoverable class="hotelCard ant-col-xs-7 ant-col-lg-5 ant-col-xxl-3">
     <img

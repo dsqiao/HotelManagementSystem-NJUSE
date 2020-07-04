@@ -1,3 +1,4 @@
+<!--添加酒店-->
 <template>
     <a-modal
         :visible="addHotelModalVisible"

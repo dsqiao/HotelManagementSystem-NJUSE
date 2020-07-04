@@ -1,3 +1,4 @@
+<!--选择城市，商圈-->
 <template>
     <div>
         <a-select class="selector" style="width: 120px" placeholder="请选择城市" @change="handleAddrChange">

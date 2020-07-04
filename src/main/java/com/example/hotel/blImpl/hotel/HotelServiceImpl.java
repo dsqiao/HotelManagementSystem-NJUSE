@@ -217,7 +217,7 @@ public class HotelServiceImpl implements HotelService {
                     num=theRoom.getRest();
                 if(!InDate.equals("Invalid date") || !OutDate.equals("Invalid date")){
                 for(int j=0;j<using.size();++j){
-                    if(roomService.checkIsConflicted(InDate.substring(0,10),OutDate.substring(0,10),using.get(j)))num--;
+                    if(roomService.checkIsConflicted(InDate.substring(0,10),OutDate.substring(0,10),using.get(j)))num--;//如果该阶段房间被占用，房间数间减一
                 }
             }}
         }

@@ -12,8 +12,17 @@ import java.util.List;
 @Mapper
 @Repository
 public interface EvaluationMapper {
-
+    /**
+     * 增加评价
+     * @param evaluation
+     * @return
+     */
     int addEvaluation(Evaluation evaluation);
 
+    /**
+     * 选择某酒店的评价
+     * @param hotelId
+     * @return
+     */
     List<Evaluation> selectEvaluationsByHotelId(@Param("hotelId") Integer hotelId);
 }

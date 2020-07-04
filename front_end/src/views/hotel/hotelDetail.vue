@@ -1,3 +1,4 @@
+<!--酒店细节-->
 <template>
     <a-layout>
         <a-layout-content>
