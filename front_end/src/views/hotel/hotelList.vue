@@ -3,7 +3,7 @@
     <Selector id="selector"></Selector>
     <OrderedCheck id="orderedCheck"></OrderedCheck>
     <SortRadio id="sortRadio"></SortRadio>
-    <a-layout>
+    <a-layout style="margin-top: 20px">
       <a-layout-content style="min-width: 800px">
         <a-spin :spinning="hotelListLoading">
           <div class="card-wrapper">
