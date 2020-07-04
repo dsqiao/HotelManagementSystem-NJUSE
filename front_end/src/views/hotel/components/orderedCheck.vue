@@ -1,3 +1,4 @@
+<!--是否预订-->
 <template>
   <a-checkbox @change="onChange">
     预定过

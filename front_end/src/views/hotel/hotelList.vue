@@ -1,3 +1,4 @@
+<!--酒店列表-->
 <template>
   <div class="hotelList">
     <Selector id="selector"></Selector>

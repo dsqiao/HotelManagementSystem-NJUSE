@@ -1,3 +1,4 @@
+<!--房间列表-->
 <template>
   <div class="room-list">
     <div class="filter"></div>
