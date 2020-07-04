@@ -60,7 +60,7 @@ class RoomServiceImplTest {
 
 
     /**
-     * 功能测似：工作人员录入房间
+     * 功能测试：工作人员录入房间
      */
     @org.junit.jupiter.api.Test
     void insertRoomInfo() {
@@ -75,7 +75,7 @@ class RoomServiceImplTest {
 
     @Test
     /**
-     * 单元测似：检查时间冲突（开始日期与入住时期相同）
+     * 单元测试：检查时间冲突（开始日期与入住时期相同）
      */
     void checkIsConflicted1() {
         OneRoom oneRoom=new OneRoom();

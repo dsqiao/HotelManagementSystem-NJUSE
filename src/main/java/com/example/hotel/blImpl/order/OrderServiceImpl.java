@@ -5,6 +5,7 @@ import com.example.hotel.bl.hotel.HotelService;
 import com.example.hotel.bl.oneRoom.OneRoomService;
 import com.example.hotel.bl.order.OrderService;
 import com.example.hotel.bl.user.AccountService;
+import com.example.hotel.data.hotel.OneRoomMapper;
 import com.example.hotel.data.hotel.RoomMapper;
 import com.example.hotel.data.order.OrderMapper;
 import com.example.hotel.data.user.AccountMapper;
@@ -51,6 +52,8 @@ public class OrderServiceImpl implements OrderService {
     RoomMapper roomMapper;
     @Autowired
     OneRoomService oneRoomService;
+    @Autowired
+    OneRoomMapper oneRoomMapper;
 
     @Override
     public ResponseVO addOrder(OrderVO orderVO) {
@@ -103,7 +106,9 @@ public class OrderServiceImpl implements OrderService {
             if(hours<=6){
                 thisUser.setCredit(thisUser.getCredit()-thisOrder.getPrice()/2);
             }
+            oneRoomMapper.deleteRoomInfo(thisOrder.getId());
             orderMapper.updateOrderState(orderid,thisOrder.getOrderState());
+            orderMapper.updateOrderState(orderid,thisOrder.getOrderState());//更新订单状态
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseVO.buildFailure("撤销失败");
@@ -159,12 +164,12 @@ public class OrderServiceImpl implements OrderService {
             if(latest.compareTo(current)<0&&Orders.get(i).getOrderState().equals("已预订")){
                 String orderState="异常";
                 Orders.get(i).setOrderState(orderState);
-                orderMapper.updateOrderState(Orders.get(i).getId(),orderState);
+                orderMapper.updateOrderState(Orders.get(i).getId(),orderState);//订单状态更新
                 int userId=Orders.get(i).getUserId();
                 String action="订单异常";
                 User user=accountService.getUserInfo(userId);
                 double change=Orders.get(i).getPrice()*0.01;
-                creditService.updateCredit(userId,action,change,user.getCredit());
+                creditService.updateCredit(userId,action,change,user.getCredit());//信用值更新
             }
         }
     }

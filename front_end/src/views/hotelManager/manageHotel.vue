@@ -1,3 +1,4 @@
+<!--管理酒店-->
 <template>
     <div class="manageHotel-wrapper">
         <a-tabs>

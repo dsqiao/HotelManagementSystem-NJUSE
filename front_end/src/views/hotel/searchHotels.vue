@@ -1,3 +1,4 @@
+<!--搜索酒店-->
 <template>
     <div class="searchHotels">
         <a-layout>

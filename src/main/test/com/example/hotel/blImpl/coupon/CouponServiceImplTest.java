@@ -75,7 +75,7 @@ class CouponServiceImplTest {
         addBirthCoupon();
         addMultipleCoupon();
         addHotelTargetMoneyCoupon();
-        OrderVO orderVO=new OrderVO();
+        OrderVO orderVO=new OrderVO();//桩
         orderVO.setCheckInDate("2020-07-01 12:00:00");
         orderVO.setCheckOutDate("2020-07-25 12:00:00");
         orderVO.setHotelId(1);
@@ -89,7 +89,7 @@ class CouponServiceImplTest {
         orderVO.setRoomType("PresidentBed");
         orderVO.setHotelName("汉庭酒店");
         orderVO.setPrice(500.0);
-        List<Coupon> coupons=couponService.getMatchOrderCoupon(orderVO);
+        List<Coupon> coupons=couponService.getMatchOrderCoupon(orderVO);//集成
         for(Coupon coupon:coupons){
             System.out.println(coupon.getCouponName());
         }

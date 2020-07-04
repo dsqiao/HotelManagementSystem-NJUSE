@@ -44,6 +44,7 @@ public interface HotelService {
      * @param roomType
      * @param InDate 入住时间
      * @param OutDate 退房时间
+     * @return  hotelVO的list
      */
     List<HotelVO> searchHotels(String address, String hotelName, String bizRegion, Integer  lowStar, Integer highStar, Integer rooms, Integer roomType, Double lowPrice,Double highPrice,String InDate, String OutDate)throws ServiceException;
 

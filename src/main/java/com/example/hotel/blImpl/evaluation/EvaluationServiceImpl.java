@@ -30,9 +30,9 @@ public class EvaluationServiceImpl implements EvaluationService {
         double totalRate=(hotelVO.getRate()*(evaluatePeople-1)+(double)rate)/evaluatePeople;
         BigDecimal b   =   new   BigDecimal(totalRate);
         totalRate = b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
-        hotelMapper.updateRate(hotelId,evaluatePeople,totalRate);
+        hotelMapper.updateRate(hotelId,evaluatePeople,totalRate);//更新评分
         String comment = evaluationVO.getEvaluation();
-        try {
+        try {//添加评论
             Evaluation evaluation = new Evaluation();
             evaluation.setEvaluation(comment);
             evaluation.setRate(rate);

@@ -52,7 +52,7 @@ public class OneRoomServiceImpl implements OneRoomService {
         int base=roomLayers.get(orderVO.getRoomType());
         HotelRoom hotelRoom=roomMapper.selectSpecificRooms(orderVO.getHotelId(),orderVO.getRoomType());
         int total=hotelRoom.getTotal();
-
+//分配房间号
         for(int i=1;i<=total;++i){
             int roomId=base+i;
             if(checkIsValidDate(orderVO.getCheckInDate(),
@@ -128,7 +128,7 @@ public class OneRoomServiceImpl implements OneRoomService {
                     checkInDate.compareTo(t1)*checkInDate.compareTo(t2)<0 ||
                     checkOutDate.compareTo(t2)==0 ||
                     checkOutDate.compareTo(t1)*checkOutDate.compareTo(t2)<0||
-                    (checkInDate.compareTo(t1)<0&&checkOutDate.compareTo(t2)>0)) return false;
+                    (checkInDate.compareTo(t1)<0&&checkOutDate.compareTo(t2)>0)) return false;//判断入住时间是否满足条件，即该阶段该房间可被预订
         }
         return true;
     }
