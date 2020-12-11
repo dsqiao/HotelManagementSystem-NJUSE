@@ -1,7 +1,7 @@
 import { axios } from '@/utils/request'
 const api = {
-    salesmanPre: 'api/salesman'
-};
+    salesmanPre: 'api/salesman',
+}
 export function getAllUserAPI() {
     return axios({
         url: `${api.salesmanPre}/getAllUser`,
@@ -9,9 +9,9 @@ export function getAllUserAPI() {
     })
 }
 export function rechargeAPI(data) {
-    return  axios({
+    return axios({
         url: `${api.salesmanPre}/recharge`,
         method: 'POST',
-        data
+        data,
     })
 }

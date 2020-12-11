@@ -1,6 +1,6 @@
 import { axios } from '@/utils/request'
 const api = {
-    orderPre: '/api/order'
+    orderPre: '/api/order',
 }
 export function reserveHotelAPI(data) {
     return axios({
@@ -46,7 +46,7 @@ export function updateOverTimeOrdersAPI(params) {
     return axios({
         url: `${api.orderPre}/updateOverTimeOrders`,
         method: 'GET',
-        params
+        params,
     })
 }
 

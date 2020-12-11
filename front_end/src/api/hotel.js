@@ -1,6 +1,6 @@
 import { axios } from '@/utils/request'
 const api = {
-    hotelPre: '/api/hotel'
+    hotelPre: '/api/hotel',
 }
 export function getHotelsAPI() {
     return axios({
@@ -14,26 +14,25 @@ export function getHotelByIdAPI(param) {
         method: 'GET',
     })
 }
-export function searchHotelsAPI(params){
+export function searchHotelsAPI(params) {
     return axios({
         url: `${api.hotelPre}/searchHotels`,
-        method:'get',
+        method: 'get',
         params,
     })
 }
 
-
-export function getDistributedRoomsAPI(orderId){
+export function getDistributedRoomsAPI(orderId) {
     return axios({
         url: `${api.hotelPre}/${orderId}/getDistributedRooms`,
-        method:'GET',
+        method: 'GET',
     })
 }
 
-export function updateRestRoomsAPI(params){
+export function updateRestRoomsAPI(params) {
     return axios({
         url: `${api.hotelPre}/updateRestRooms`,
-        method:'POST',
-        params
+        method: 'POST',
+        params,
     })
 }

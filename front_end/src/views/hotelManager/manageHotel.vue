@@ -4,17 +4,25 @@
         <a-tabs>
             <a-tab-pane tab="酒店管理" key="1">
                 <div style="width: 100%; text-align: right; margin:20px 0">
-                    <a-button type="primary" @click="addHotel"><a-icon type="plus" />添加酒店</a-button>
+                    <a-button type="primary" @click="addHotel"
+                        ><a-icon type="plus" />添加酒店</a-button
+                    >
                 </div>
-                 <a-table
-                    :columns="columns1"
-                    :dataSource="hotelList"
-                    bordered
-                >
+                <a-table :columns="columns1" :dataSource="hotelList" bordered>
                     <span slot="action" slot-scope="record">
-                        <a-button type="primary" size="small" @click="addRoom(record)">录入房间</a-button>
+                        <a-button
+                            type="primary"
+                            size="small"
+                            @click="addRoom(record)"
+                            >录入房间</a-button
+                        >
                         <a-divider type="vertical"></a-divider>
-                        <a-button type="info" size="small" @click="showCoupon(record)">优惠策略</a-button>
+                        <a-button
+                            type="info"
+                            size="small"
+                            @click="showCoupon(record)"
+                            >优惠策略</a-button
+                        >
                         <a-divider type="vertical"></a-divider>
                         <a-popconfirm
                             title="确定想删除该酒店吗？"
@@ -22,17 +30,15 @@
                             okText="确定"
                             cancelText="取消"
                         >
-                            <a-button type="danger" size="small">删除酒店</a-button>
+                            <a-button type="danger" size="small"
+                                >删除酒店</a-button
+                            >
                         </a-popconfirm>
                     </span>
                 </a-table>
             </a-tab-pane>
             <a-tab-pane tab="订单管理" key="2">
-                <a-table
-                    :columns="columns2"
-                    :dataSource="orderList"
-                    bordered
-                >
+                <a-table :columns="columns2" :dataSource="orderList" bordered>
                     <span slot="price" slot-scope="text">
                         <span>￥{{ text }}</span>
                     </span>
@@ -46,7 +52,9 @@
                         {{ text }}
                     </a-tag>
                     <span slot="action" slot-scope="record">
-                        <a-button size="small" @click="showOrder(record)">查看</a-button>
+                        <a-button size="small" @click="showOrder(record)"
+                            >查看</a-button
+                        >
                         <a-divider type="vertical"></a-divider>
                         <a-popconfirm
                             title="确定想执行该订单吗？"
@@ -54,24 +62,44 @@
                             okText="确定"
                             cancelText="取消"
                         >
-                            <a-button type="primary" size="small" v-if="record.orderState==='已预订'||record.orderState==='异常'">执行</a-button>
+                            <a-button
+                                type="primary"
+                                size="small"
+                                v-if="
+                                    record.orderState === '已预订' ||
+                                        record.orderState === '异常'
+                                "
+                                >执行</a-button
+                            >
                         </a-popconfirm>
-                        <a-divider type="vertical" v-if="record.orderState==='已预订'||record.orderState==='异常'"></a-divider>
-                        
+                        <a-divider
+                            type="vertical"
+                            v-if="
+                                record.orderState === '已预订' ||
+                                    record.orderState === '异常'
+                            "
+                        ></a-divider>
+
                         <a-popconfirm
                             title="确定想退房吗？"
                             @confirm="checkOut(record)"
                             okText="确定"
                             cancelText="取消"
                         >
-                            <a-button type="danger" size="small" v-if="record.orderState==='已入住'">退房</a-button>
+                            <a-button
+                                type="danger"
+                                size="small"
+                                v-if="record.orderState === '已入住'"
+                                >退房</a-button
+                            >
                         </a-popconfirm>
-                        <a-divider type="vertical" v-if="record.orderState==='已入住'"></a-divider>
-                        
+                        <a-divider
+                            type="vertical"
+                            v-if="record.orderState === '已入住'"
+                        ></a-divider>
                     </span>
                 </a-table>
             </a-tab-pane>
-            
         </a-tabs>
         <AddHotelModal></AddHotelModal>
         <AddRoomModal></AddRoomModal>
@@ -87,7 +115,7 @@ import Coupon from './components/coupon'
 import OrderDetailModal from '../user/components/orderDetailModal'
 const moment = require('moment')
 const columns1 = [
-    {  
+    {
         title: '酒店名',
         dataIndex: 'name',
     },
@@ -112,34 +140,34 @@ const columns1 = [
         dataIndex: 'description',
     },
     {
-      title: '操作',
-      key: 'action',
-      scopedSlots: { customRender: 'action' },
+        title: '操作',
+        key: 'action',
+        scopedSlots: { customRender: 'action' },
     },
-  ];
+]
 const columns2 = [
-    {  
+    {
         title: '订单号',
         dataIndex: 'id',
     },
-    {  
+    {
         title: '酒店名',
         dataIndex: 'hotelName',
     },
     {
         title: '房型',
         dataIndex: 'roomType',
-        scopedSlots: { customRender: 'roomType' }
+        scopedSlots: { customRender: 'roomType' },
     },
     {
         title: '入住时间',
         dataIndex: 'checkInDate',
-        scopedSlots: { customRender: 'checkInDate' }
+        scopedSlots: { customRender: 'checkInDate' },
     },
     {
         title: '离店时间',
         dataIndex: 'checkOutDate',
-        scopedSlots: { customRender: 'checkOutDate' }
+        scopedSlots: { customRender: 'checkOutDate' },
     },
     {
         title: '入住人数',
@@ -155,20 +183,26 @@ const columns2 = [
     },
     {
         title: '订单状态',
-        filters: [{ text: '已预订', value: '已预订' }, { text: '已撤销', value: '已撤销' }, { text: '已入住', value: '已入住' },{text:'已退房',value:'已退房'},{text:'异常',value:'异常'}],
+        filters: [
+            { text: '已预订', value: '已预订' },
+            { text: '已撤销', value: '已撤销' },
+            { text: '已入住', value: '已入住' },
+            { text: '已退房', value: '已退房' },
+            { text: '异常', value: '异常' },
+        ],
         onFilter: (value, record) => record.orderState.includes(value),
         dataIndex: 'orderState',
-        scopedSlots: { customRender: 'orderState' }
+        scopedSlots: { customRender: 'orderState' },
     },
     {
-      title: '操作',
-      key: 'action',
-      scopedSlots: { customRender: 'action' },
+        title: '操作',
+        key: 'action',
+        scopedSlots: { customRender: 'action' },
     },
-  ];
+]
 export default {
     name: 'manageHotel',
-    data(){
+    data() {
         return {
             formLayout: 'horizontal',
             pagination: {},
@@ -181,7 +215,7 @@ export default {
         AddHotelModal,
         AddRoomModal,
         Coupon,
-        OrderDetailModal
+        OrderDetailModal,
     },
     computed: {
         ...mapGetters([
@@ -192,17 +226,16 @@ export default {
             'addRoomModalVisible',
             'activeHotelId',
             'couponVisible',
-            'addRoomParams'
+            'addRoomParams',
         ]),
     },
     async mounted() {
         await this.set_managerId(Number(this.userId))
         await this.getManagedHotel({
-            managerId:Number(this.userId)
-        });
+            managerId: Number(this.userId),
+        })
         await this.checkOverTimeOrders()
     },
-
 
     methods: {
         ...mapMutations([
@@ -225,9 +258,8 @@ export default {
             'executeOrderById',
             'updateManagerOverTimeOrders',
             'checkOutOrder',
-            'getDistributedRooms'
+            'getDistributedRooms',
         ]),
-
 
         addHotel() {
             this.set_addHotelModalVisible(true)
@@ -240,60 +272,57 @@ export default {
             this.set_activeHotelId(record.id)
             this.getHotelCoupon()
             this.set_couponVisible(true)
-
         },
-        deleteHotel(record){
+        deleteHotel(record) {
             this.set_activeHotelId(record.id)
             this.deleteHotelById()
             this.getManagedHotelList({
-                managerId:Number(this.userId)
+                managerId: Number(this.userId),
             })
         },
-        executeOrder(record){
+        executeOrder(record) {
             this.set_activeOrderId(record.id)
             this.executeOrderById({
-                activeOrderId:record.id,
-                managerId:{
-                    managerId:Number(this.userId)
-                }
+                activeOrderId: record.id,
+                managerId: {
+                    managerId: Number(this.userId),
+                },
             })
         },
-        checkOut(record){
+        checkOut(record) {
             this.set_activeOrderId(record.id)
             this.checkOutOrder(record.id)
         },
-        checkOverTimeOrders(){
+        checkOverTimeOrders() {
             this.updateManagerOverTimeOrders({
-                userId:Number(this.userId),
-                type:"hotelManager"
+                userId: Number(this.userId),
+                type: 'hotelManager',
             })
         },
-        showOrder(record){
-            this.set_currentOrder(record);
-            this.set_orderDetailModalVisible(true);
+        showOrder(record) {
+            this.set_currentOrder(record)
+            this.set_orderDetailModalVisible(true)
             this.getDistributedRooms(record.id)
         },
-    }
+    },
 }
 </script>
 <style scoped lang="less">
-    .manageHotel-wrapper {
-        padding: 50px;
-        .chart {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 20px
-        }
+.manageHotel-wrapper {
+    padding: 50px;
+    .chart {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
     }
+}
 </style>
 <style lang="less">
-    .manageHotel-wrapper {
-        .ant-tabs-bar {
-            padding-left: 30px
-        }
+.manageHotel-wrapper {
+    .ant-tabs-bar {
+        padding-left: 30px;
     }
+}
 </style>
-<style lang="less">
-
-</style>
+<style lang="less"></style>

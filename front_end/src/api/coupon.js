@@ -1,6 +1,6 @@
 import { axios } from '@/utils/request'
 const api = {
-    couponPre: '/api/coupon'
+    couponPre: '/api/coupon',
 }
 export function hotelTargetMoneyAPI(data) {
     return axios({
@@ -11,38 +11,37 @@ export function hotelTargetMoneyAPI(data) {
 }
 export function hotelMultipleMoneyAPI(data) {
     return axios({
-        url:`${api.couponPre}/hotelMultipleCoupon`,
-        method:'POST',
+        url: `${api.couponPre}/hotelMultipleCoupon`,
+        method: 'POST',
         data,
     })
-
 }
 export function hotelTimeMoneyAPI(data) {
     return axios({
-        url:`${api.couponPre}/hotelTimeCoupon`,
-        method:'POST',
+        url: `${api.couponPre}/hotelTimeCoupon`,
+        method: 'POST',
         data,
     })
 }
 export function hotelBirthMoneyAPI(data) {
     return axios({
-        url:`${api.couponPre}/hotelBirthCoupon`,
-        method:'POST',
+        url: `${api.couponPre}/hotelBirthCoupon`,
+        method: 'POST',
         data,
     })
 }
-export function deleteHotelCouponsAPI(hotelId){
+export function deleteHotelCouponsAPI(hotelId) {
     return axios({
-        url:`${api.couponPre}/deleteHotelCoupons`,
-        method:'POST',
-        params:{hotelId:hotelId},
+        url: `${api.couponPre}/deleteHotelCoupons`,
+        method: 'POST',
+        params: { hotelId: hotelId },
     })
 }
 export function hotelAllCouponsAPI(hotelId) {
     return axios({
         url: `${api.couponPre}/hotelAllCoupons`,
         method: 'GET',
-        params: {hotelId: hotelId},
+        params: { hotelId: hotelId },
     })
 }
 

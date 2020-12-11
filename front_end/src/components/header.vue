@@ -2,44 +2,76 @@
 <template>
     <div class="header">
         <div class="label">
-            <img src="@/assets/logo.svg" class="logo" alt="logo" @click="jumpToHome">
+            <img
+                src="@/assets/logo.svg"
+                class="logo"
+                alt="logo"
+                @click="jumpToHome"
+            />
             <span class="title">NJUSE 酒店管理系统</span>
-            
         </div>
         <a-menu v-model="current" mode="horizontal" theme="light">
-            <a-menu-item key="1" @click="selectMenu" v-if="userInfo.userType==='Client'">
-                <router-link to="/hotel/hotelList" >
+            <a-menu-item
+                key="1"
+                @click="selectMenu"
+                v-if="userInfo.userType === 'Client'"
+            >
+                <router-link to="/hotel/hotelList">
                     <a-icon type="home" />首页
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="2" @click="jumpToUserInfo" v-if="userInfo.userType === 'Client'">
+            <a-menu-item
+                key="2"
+                @click="jumpToUserInfo"
+                v-if="userInfo.userType === 'Client'"
+            >
                 <a-icon type="user" />个人中心
             </a-menu-item>
-            
-            <a-menu-item key="3" @click="selectMenu" v-if="userInfo.userType ==='HotelManager'">
-                <router-link :to="{ name: 'manageHotel'}">
-                     <a-icon type="switcher" />酒店管理
+
+            <a-menu-item
+                key="3"
+                @click="selectMenu"
+                v-if="userInfo.userType === 'HotelManager'"
+            >
+                <router-link :to="{ name: 'manageHotel' }">
+                    <a-icon type="switcher" />酒店管理
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="4" @click="selectMenu" v-if="userInfo.userType === 'Admin'">
-                <router-link :to="{ name: 'manageUser'}">
-                     <a-icon type="user" />账户管理
+            <a-menu-item
+                key="4"
+                @click="selectMenu"
+                v-if="userInfo.userType === 'Admin'"
+            >
+                <router-link :to="{ name: 'manageUser' }">
+                    <a-icon type="user" />账户管理
                 </router-link>
             </a-menu-item>
 
-            <a-menu-item key="5" @click="selectMenu" v-if="userInfo.userType==='Client'">
-                <router-link  to="/hotel/searchHotels">
-                <a-icon type="search"/>搜索酒店
+            <a-menu-item
+                key="5"
+                @click="selectMenu"
+                v-if="userInfo.userType === 'Client'"
+            >
+                <router-link to="/hotel/searchHotels">
+                    <a-icon type="search" />搜索酒店
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="6" @click="selectMenu" v-if="userInfo.userType === 'Salesman'">
-                <router-link :to="{ name: 'creditRecharge'}">
+            <a-menu-item
+                key="6"
+                @click="selectMenu"
+                v-if="userInfo.userType === 'Salesman'"
+            >
+                <router-link :to="{ name: 'creditRecharge' }">
                     <a-icon type="credit-card" />信用充值
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="7" @click="selectMenu" v-if="userInfo.userType === 'Salesman'">
-                <router-link :to="{ name: 'websiteDiscount'}">
-                    <a-icon type="pay-circle"/>网站活动
+            <a-menu-item
+                key="7"
+                @click="selectMenu"
+                v-if="userInfo.userType === 'Salesman'"
+            >
+                <router-link :to="{ name: 'websiteDiscount' }">
+                    <a-icon type="pay-circle" />网站活动
                 </router-link>
             </a-menu-item>
         </a-menu>
@@ -48,27 +80,28 @@
                 <div class="user">
                     <a-avatar :src="userInfo.avatarUrl"></a-avatar>
                     <span style="font-size: 14px">{{ userInfo.userName }}</span>
-                    <a-icon style="margin-left: 3px; font-size: 16px" type="down"></a-icon>
+                    <a-icon
+                        style="margin-left: 3px; font-size: 16px"
+                        type="down"
+                    ></a-icon>
                 </div>
                 <a-menu slot="overlay">
-                <a-menu-item  @click="jumpToHome()">
-                    <a-icon type="home"></a-icon>
-                    首页
-                </a-menu-item>
-                <a-menu-item @click="jumpToUserInfo()">
-                    <a-icon type="profile"></a-icon>
-                    我的信息
-                </a-menu-item>
-                <a-menu-item @click="quit()">
-                    <a-icon type="poweroff"></a-icon>
-                    退出登录
-                </a-menu-item>
+                    <a-menu-item @click="jumpToHome()">
+                        <a-icon type="home"></a-icon>
+                        首页
+                    </a-menu-item>
+                    <a-menu-item @click="jumpToUserInfo()">
+                        <a-icon type="profile"></a-icon>
+                        我的信息
+                    </a-menu-item>
+                    <a-menu-item @click="quit()">
+                        <a-icon type="poweroff"></a-icon>
+                        退出登录
+                    </a-menu-item>
                 </a-menu>
             </a-dropdown>
         </div>
-        
     </div>
-    
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
@@ -76,108 +109,103 @@ export default {
     name: '',
     data() {
         return {
-            current: ['1']
+            current: ['1'],
         }
     },
     computed: {
-        ...mapGetters([
-            'userId',
-            'userInfo'
-        ]),
+        ...mapGetters(['userId', 'userInfo']),
     },
     mounted() {
-        if (this.$route.name === 'hotelList' || this.$route.name === 'hotelDetail') {
+        if (
+            this.$route.name === 'hotelList' ||
+            this.$route.name === 'hotelDetail'
+        ) {
             this.current = ['1']
         } else if (this.$route.name === 'userInfo') {
             this.current = ['2']
         } else if (this.$route.name === 'manageHotel') {
             this.current = ['3']
-        } else if (this.$route.name ==='manageUser'){
+        } else if (this.$route.name === 'manageUser') {
             this.current = ['4']
-        } else if (this.$route.name === 'searchHotels'){
-            this.current=['5']
-        } else if (this.$route.name === 'creditRecharge'){
+        } else if (this.$route.name === 'searchHotels') {
+            this.current = ['5']
+        } else if (this.$route.name === 'creditRecharge') {
             this.current = ['6']
         } else {
             this.current = ['7']
         }
     },
     methods: {
-        ...mapMutations([
-
-        ]),
-        ...mapActions([
-            'logout'
-        ]),
-        selectMenu(v){
-        },
+        ...mapMutations([]),
+        ...mapActions(['logout']),
+        selectMenu(v) {},
         async quit() {
             await this.$store.dispatch('logout')
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         },
         jumpToUserInfo() {
-            this.$router.push({ name: 'userInfo', params: { userId: this.userId } })
+            this.$router.push({
+                name: 'userInfo',
+                params: { userId: this.userId },
+            })
         },
-        jumpToHome() {
-
-        }
-    }
+        jumpToHome() {},
+    },
 }
 </script>
 <style scoped lang="less">
-    .header {
-        display: flex;
-        line-height: 44px;
+.header {
+    display: flex;
+    line-height: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 800px;
+    .label {
         height: 44px;
-        align-items: center;
-        justify-content: space-between;
-        min-width: 800px;
-        .label{
-            height: 44px;
-            line-height: 44px;
-            vertical-align: middle;
-            min-width: 400px;
+        line-height: 44px;
+        vertical-align: middle;
+        min-width: 400px;
 
-            .logo {
+        .logo {
             height: 44px;
             vertical-align: top;
             margin-right: 16px;
             border-style: none;
             cursor: pointer;
-          }
+        }
 
-          .title {
+        .title {
             font-size: 33px;
-            color: rgba(0, 0, 0, .85);
+            color: rgba(0, 0, 0, 0.85);
             font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
             font-weight: 600;
             position: relative;
             top: 2px;
-          }
-
-          .search {
-              width: 300px; 
-              margin-left: 30px
-          }
         }
-        .logout {
-            margin-right: 40px;
-            .user {
-                cursor: pointer;
-                display:flex;
-                align-items: center;
-                span {
-                    margin-left: 5px
-                }
+
+        .search {
+            width: 300px;
+            margin-left: 30px;
+        }
+    }
+    .logout {
+        margin-right: 40px;
+        .user {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            span {
+                margin-left: 5px;
             }
         }
-
     }
+}
 </style>
 <style lang="less">
-    .header {
-        .ant-menu {
-            background: none
-        }
+.header {
+    .ant-menu {
+        background: none;
     }
+}
 </style>

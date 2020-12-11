@@ -4,25 +4,23 @@
     <div class="manageUser-wrapper">
         <a-tabs>
             <a-tab-pane tab="客户管理" key="2">
-                <a-table
-                        :columns="columns1"
-                        :dataSource="clientList"
-                        bordered
-                >
+                <a-table :columns="columns1" :dataSource="clientList" bordered>
                     <span slot="action" slot-scope="record">
                         <a-popconfirm
-                                title="确定想删除该客户吗？"
-                                @confirm="deleteUsers(record)"
-                                okText="确定"
-                                cancelText="取消"
+                            title="确定想删除该客户吗？"
+                            @confirm="deleteUsers(record)"
+                            okText="确定"
+                            cancelText="取消"
                         >
-                            <a-button type="danger" size="small">删除客户</a-button>
+                            <a-button type="danger" size="small"
+                                >删除客户</a-button
+                            >
                         </a-popconfirm>
                         <a-button
-                                type="primary"
-                                size="small"
-                                @click="modifyInfo(record)"
-                                style="margin-left: 30px"
+                            type="primary"
+                            size="small"
+                            @click="modifyInfo(record)"
+                            style="margin-left: 30px"
                         >
                             修改信息
                         </a-button>
@@ -31,13 +29,11 @@
             </a-tab-pane>
             <a-tab-pane tab="酒店工作人员管理" key="1">
                 <div style="width: 100%; text-align: right; margin:20px 0">
-                    <a-button type="primary" @click="addManager"><a-icon type="plus" />添加酒店工作人员</a-button>
+                    <a-button type="primary" @click="addManager"
+                        ><a-icon type="plus" />添加酒店工作人员</a-button
+                    >
                 </div>
-                <a-table
-                    :columns="columns2"
-                    :dataSource="managerList"
-                    bordered
-                >
+                <a-table :columns="columns2" :dataSource="managerList" bordered>
                     <span slot="action" slot-scope="record">
                         <a-popconfirm
                             title="确定想删除该工作人员吗？"
@@ -45,13 +41,15 @@
                             okText="确定"
                             cancelText="取消"
                         >
-                            <a-button type="danger" size="small">删除酒店工作人员</a-button>
+                            <a-button type="danger" size="small"
+                                >删除酒店工作人员</a-button
+                            >
                         </a-popconfirm>
                         <a-button
-                                type="primary"
-                                size="small"
-                                @click="modifyInfo(record)"
-                                style="margin-left: 30px"
+                            type="primary"
+                            size="small"
+                            @click="modifyInfo(record)"
+                            style="margin-left: 30px"
                         >
                             修改信息
                         </a-button>
@@ -60,7 +58,9 @@
             </a-tab-pane>
             <a-tab-pane tab="网站营销人员管理" key="3">
                 <div style="width: 100%; text-align: right; margin:20px 0">
-                    <a-button type="primary" @click="addSalesman"><a-icon type="plus" />添加网站营销人员</a-button>
+                    <a-button type="primary" @click="addSalesman"
+                        ><a-icon type="plus" />添加网站营销人员</a-button
+                    >
                 </div>
                 <a-table
                     :columns="columns2"
@@ -74,13 +74,15 @@
                             okText="确定"
                             cancelText="取消"
                         >
-                            <a-button type="danger" size="small">删除营销人员</a-button>
+                            <a-button type="danger" size="small"
+                                >删除营销人员</a-button
+                            >
                         </a-popconfirm>
                         <a-button
-                                type="primary"
-                                size="small"
-                                @click="modifyInfo(record)"
-                                style="margin-left: 30px"
+                            type="primary"
+                            size="small"
+                            @click="modifyInfo(record)"
+                            style="margin-left: 30px"
                         >
                             修改信息
                         </a-button>
@@ -100,11 +102,11 @@ import AddSalesmanModal from './components/addSalesmanModal'
 import ModifyInfoModal from './components/modifyInfoModal'
 
 const columns1 = [
-    {  
+    {
         title: '用户邮箱',
         dataIndex: 'email',
     },
-    {  
+    {
         title: '用户名',
         dataIndex: 'userName',
     },
@@ -121,11 +123,11 @@ const columns1 = [
         dataIndex: 'credit',
     },
     {
-      title: '操作',
-      key: 'action',
-      scopedSlots: { customRender: 'action' },
+        title: '操作',
+        key: 'action',
+        scopedSlots: { customRender: 'action' },
     },
-];
+]
 const columns2 = [
     {
         title: '用户邮箱',
@@ -148,10 +150,10 @@ const columns2 = [
         key: 'action',
         scopedSlots: { customRender: 'action' },
     },
-];
+]
 export default {
     name: 'manageHotel',
-    data(){
+    data() {
         return {
             formLayout: 'horizontal',
             pagination: {},
@@ -164,7 +166,7 @@ export default {
     components: {
         ModifyInfoModal,
         AddSalesmanModal,
-        AddManagerModal
+        AddManagerModal,
     },
     computed: {
         ...mapGetters([
@@ -174,12 +176,12 @@ export default {
             'managerList',
             'clientList',
             'salesmanList',
-        ])
+        ]),
     },
     mounted() {
-        this.getManagerList();
-        this.getClientList();
-        this.getSalesmanList();
+        this.getManagerList()
+        this.getClientList()
+        this.getSalesmanList()
     },
     methods: {
         ...mapActions([
@@ -195,15 +197,15 @@ export default {
             'set_modifyingUserId',
             'set_modifyingUserInfo',
         ]),
-        addManager(){
+        addManager() {
             this.set_addManagerModalVisible(true)
         },
-        addSalesman(){
+        addSalesman() {
             this.set_addSalesmanModalVisible(true)
         },
-        deleteUsers(record){
+        deleteUsers(record) {
             // 删除三种类型的用户
-            this.deleteUser(record);
+            this.deleteUser(record)
         },
         modifyInfo(record) {
             this.set_modifyingUserInfo({
@@ -211,31 +213,29 @@ export default {
                 email: record.email,
                 password: record.password,
                 phoneNumber: record.phoneNumber,
-            });
-            this.set_modifyingUserId(record.id);
+            })
+            this.set_modifyingUserId(record.id)
             this.set_modifyInfoModalVisible(true)
         },
-    }
+    },
 }
 </script>
 <style scoped lang="less">
-    .manageUser-wrapper {
-        padding: 50px;
-        .chart {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 20px
-        }
+.manageUser-wrapper {
+    padding: 50px;
+    .chart {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
     }
+}
 </style>
 <style lang="less">
-    .manageUser-wrapper {
-        .ant-tabs-bar {
-            padding-left: 30px
-        }
+.manageUser-wrapper {
+    .ant-tabs-bar {
+        padding-left: 30px;
     }
+}
 </style>
-<style lang="less">
-    
-</style>
+<style lang="less"></style>

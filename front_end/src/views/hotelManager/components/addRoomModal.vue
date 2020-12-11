@@ -12,25 +12,42 @@
             <a-form-item label="房型" v-bind="formItemLayout">
                 <a-select
                     v-decorator="[
-                    'roomType', 
-                    { rules: [{ required: true, message: '请选择房型' }] }]"
+                        'roomType',
+                        { rules: [{ required: true, message: '请选择房型' }] },
+                    ]"
                 >
-                  <a-select-option value="BigBed">大床房</a-select-option>
-                  <a-select-option value="DoubleBed">双床房</a-select-option>
-                  <a-select-option value="Family">家庭房</a-select-option>
-                  <a-select-option value="PresidentBed">总统套房</a-select-option>
+                    <a-select-option value="BigBed">大床房</a-select-option>
+                    <a-select-option value="DoubleBed">双床房</a-select-option>
+                    <a-select-option value="Family">家庭房</a-select-option>
+                    <a-select-option value="PresidentBed"
+                        >总统套房</a-select-option
+                    >
                 </a-select>
             </a-form-item>
             <a-form-item label="房间数量" v-bind="formItemLayout">
                 <a-input
                     placeholder="请填写房间数量"
-                    v-decorator="['roomNum', { rules: [{ required: true, message: '请输入房间数量' }] }]"
+                    v-decorator="[
+                        'roomNum',
+                        {
+                            rules: [
+                                { required: true, message: '请输入房间数量' },
+                            ],
+                        },
+                    ]"
                 />
             </a-form-item>
             <a-form-item label="原始价格" v-bind="formItemLayout">
                 <a-input
                     placeholder="请填写原始价格"
-                    v-decorator="['price', { rules: [{ required: true, message: '请输入原始价格' }] }]"
+                    v-decorator="[
+                        'price',
+                        {
+                            rules: [
+                                { required: true, message: '请输入原始价格' },
+                            ],
+                        },
+                    ]"
                 />
             </a-form-item>
         </a-form>
@@ -58,26 +75,21 @@ export default {
         ...mapGetters([
             'addRoomModalVisible',
             'activeHotelId',
-            'addRoomParams'
-        ])
+            'addRoomParams',
+        ]),
     },
     beforeCreate() {
-        this.form = this.$form.createForm(this, { name: 'addRoomModal' });
+        this.form = this.$form.createForm(this, { name: 'addRoomModal' })
     },
-    
+
     methods: {
-        ...mapMutations([
-            'set_addRoomModalVisible',
-            'set_addRoomParams'
-        ]),
-        ...mapActions([
-            'addRoom'
-        ]),
+        ...mapMutations(['set_addRoomModalVisible', 'set_addRoomParams']),
+        ...mapActions(['addRoom']),
         cancel() {
             this.set_addRoomModalVisible(false)
         },
         handleSubmit(e) {
-            e.preventDefault();
+            e.preventDefault()
             this.form.validateFieldsAndScroll((err, values) => {
                 if (!err) {
                     const data = {
@@ -90,8 +102,8 @@ export default {
                     this.set_addRoomParams(data)
                     this.addRoom()
                 }
-            });
+            })
         },
-    }
+    },
 }
 </script>

@@ -2,7 +2,7 @@
     <div id="layout">
         <Header></Header>
         <transition name="fade-transform" mode="out-in">
-            <router-view/>
+            <router-view />
         </transition>
     </div>
 </template>
@@ -11,7 +11,7 @@ import Header from '@/components/header'
 export default {
     name: 'layout',
     components: {
-        Header
-    }
+        Header,
+    },
 }
 </script>

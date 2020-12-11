@@ -1,38 +1,38 @@
 import { axios } from '@/utils/request'
 
 const api = {
-    creditPre: '/api/credit'
+    creditPre: '/api/credit',
 }
-export function getUserCreditAPI(userId){
+export function getUserCreditAPI(userId) {
     return axios({
-        url:`${api.creditPre}/${userId}/userCredit`,
+        url: `${api.creditPre}/${userId}/userCredit`,
         method: 'GET',
     })
 }
-export function updateCreditAPI(params){
+export function updateCreditAPI(params) {
     return axios({
         url: `${api.creditPre}/updateCredit`,
         method: 'POST',
-        params
+        params,
     })
 }
-export function getUserInfoAPI(id){
+export function getUserInfoAPI(id) {
     return axios({
         url: `${api.userPre}/${id}/getUserInfo`,
-        method: 'GET'
+        method: 'GET',
     })
 }
 export function updateUserInfoAPI(data) {
     return axios({
         url: `${api.userPre}/${data.id}/userInfo/update`,
         method: 'POST',
-        data
+        data,
     })
 }
 export function beMemberAPI(data) {
     return axios({
         url: `${api.userPre}/${data.id}/userInfo/beMember`,
         method: 'POST',
-        data
+        data,
     })
 }

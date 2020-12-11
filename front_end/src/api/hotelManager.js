@@ -1,6 +1,6 @@
 import { axios } from '@/utils/request'
 const api = {
-    hotelPre: '/api/hotel'
+    hotelPre: '/api/hotel',
 }
 export function getHotelListByManagerIdAPI(param) {
     return axios({
@@ -23,9 +23,9 @@ export function addHotelAPI(data) {
     })
 }
 
-export function deleteHotelAPI(param){
+export function deleteHotelAPI(param) {
     return axios({
-        url:`${api.hotelPre}/${param.hotelId}/deleteHotel`,
-        method:'POST',
+        url: `${api.hotelPre}/${param.hotelId}/deleteHotel`,
+        method: 'POST',
     })
 }

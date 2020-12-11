@@ -1,7 +1,7 @@
 import { axios } from '@/utils/request'
 const api = {
-    evaluatePre: '/api/evaluate'
-};
+    evaluatePre: '/api/evaluate',
+}
 export function evaluateAPI(data) {
     return axios({
         url: `${api.evaluatePre}/addEvaluation`,

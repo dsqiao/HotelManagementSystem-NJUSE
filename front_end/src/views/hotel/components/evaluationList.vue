@@ -3,10 +3,7 @@
     <div class="evaluationList">
         <div class="filter"></div>
         <div class="list">
-            <a-table
-                :columns="columns"
-                :dataSource="evaluations"
-            >
+            <a-table :columns="columns" :dataSource="evaluations">
                 <span slot="rate" slot-scope="text">
                     <a-rate :default-value="text" disabled />
                 </span>
@@ -17,44 +14,41 @@
 </template>
 
 <script>
-    import EvaluateModal from './evaluateModal'
-    const columns = [
-        {
-            title: '用户',
-            dataIndex: 'userId',
-            key: 'userId',
+import EvaluateModal from './evaluateModal'
+const columns = [
+    {
+        title: '用户',
+        dataIndex: 'userId',
+        key: 'userId',
+    },
+    {
+        title: '评分',
+        dataIndex: 'rate',
+        key: 'rate',
+        scopedSlots: { customRender: 'rate' },
+    },
+    {
+        title: '评论',
+        dataIndex: 'evaluation',
+        key: 'evaluation',
+    },
+]
+export default {
+    name: 'evaluationList',
+    props: {
+        evaluations: {
+            type: Array,
         },
-        {
-            title: '评分',
-            dataIndex: 'rate',
-            key: 'rate',
-            scopedSlots: { customRender: 'rate'}
-        },
-        {
-            title: '评论',
-            dataIndex: 'evaluation',
-            key: 'evaluation',
+    },
+    data() {
+        return {
+            columns,
         }
-    ];
-    export default {
-        name: "evaluationList",
-        props: {
-            evaluations: {
-                type: Array,
-            },
-        },
-        data() {
-            return {
-                columns,
-            }
-        },
-        components: {
-            EvaluateModal
-        },
-
-    }
+    },
+    components: {
+        EvaluateModal,
+    },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
