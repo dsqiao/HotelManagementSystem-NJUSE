@@ -67,19 +67,25 @@ const user = {
     },
 
     actions: {
-        login: async ({ state, dispatch, commit }, userData) => {
+        // 登录验证函数，userData 是需要验证的信息（邮箱和密码）
+        login: async ({ dispatch, commit }, userData) => {
             const res = await loginAPI(userData)
+            // res 包含了该名用户的所有信息
             if (res) {
                 setToken(res.id)
                 commit('set_userId', res.id)
                 dispatch('getUserInfo')
-                if (res.userType == 'Client') router.push('/hotel/hotelList')
-                else if (res.userType == 'HotelManager')
+                if (res.userType == 'Client') {
+                    router.push('/hotel/hotelList')
+                } else if (res.userType == 'HotelManager') {
                     router.push('/hotelManager/manageHotel')
-                else if (res.userType == 'Salesman')
+                } else if (res.userType == 'Salesman') {
                     router.push('/salesman/creditRecharge')
-                else if (res.userType == 'Admin')
+                } else if (res.userType == 'Admin') {
                     router.push('/admin/manageUser')
+                }
+            } else {
+                console.log(res) // undefined
             }
         },
         register: async ({ commit }, data) => {

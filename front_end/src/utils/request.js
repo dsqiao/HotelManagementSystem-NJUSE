@@ -58,7 +58,7 @@ service.interceptors.response.use((response) => {
             if (response.data.success && response.data.success) {
                 return response.data.content
             }
-            message.error(response.data.message)
+            message.error(response.data.message) // 用户名或密码错误时输出错误信息（为什么这要封装在 axios 里呢
             break
         case 404:
             return false

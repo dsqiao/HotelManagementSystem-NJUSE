@@ -5,7 +5,6 @@
             default-value="default"
             button-style="solid"
             @change="handleSortChange"
-            size="medium"
         >
             <a-radio-button class="button" value="default">
                 默认排序

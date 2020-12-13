@@ -28,7 +28,7 @@
                             type="text"
                             placeholder="邮箱"
                             v-decorator="[
-                                'username',
+                                'email',
                                 {
                                     rules: [
                                         {
@@ -40,9 +40,11 @@
                                 },
                             ]"
                         >
+                            <!-- a-icon：input 输入框左侧图标 -->
+                            <!-- slot 属性官网 API 没查到，已知 prefix 是前缀， suffix 是后缀-->
                             <a-icon
                                 slot="prefix"
-                                type="user"
+                                type="mail"
                                 :style="{ color: 'rgba(0,0,0,.25)' }"
                             />
                         </a-input>
@@ -75,14 +77,16 @@
                         </a-input>
                     </a-form-item>
                     <a-form-item style="margin-top:24px">
+                        <!-- loading 属性，当loginLoading 为 True 时，按钮显示加载（转圈圈）-->
                         <a-button
                             size="large"
                             type="primary"
                             class="login-button"
                             :loading="loginLoading"
-                            @click="handlelogin()"
-                            >确定</a-button
+                            @click="handleLogin()"
                         >
+                            确定
+                        </a-button>
                     </a-form-item>
                 </a-tab-pane>
 
@@ -298,27 +302,38 @@ export default {
         handleTabClick(key) {
             this.customActiveKey = key
         },
-        handlelogin() {
+
+        // 登录按钮处理函数
+        handleLogin() {
             const validateFieldsKey =
                 this.customActiveKey === 'tab1'
-                    ? ['username', 'password']
+                    ? ['email', 'password']
                     : [
                           'registerUsername',
                           'registerUserMail',
                           'registerPassword',
                           'registerPasswordconfirm',
                       ]
+            
+            // form.validateFields() 校验并获取一组输入域的值
+            // param1: [fieldNames: string[]]
+            // param2: [options: object]
+            // param3: callback function(errors, values)
             this.form.validateFields(
-                validateFieldsKey,
+                validateFieldsKey, // ['email', 'password']
                 { force: true },
                 async (err, values) => {
+                    // values = {
+                    //     password: '用户输入的密码',
+                    //     username: '用户输入的邮箱'
+                    // }
                     if (!err) {
                         this.loginLoading = true
                         const data = {
-                            email: this.form.getFieldValue('username'),
+                            email: this.form.getFieldValue('email'),
                             password: this.form.getFieldValue('password'),
                         }
-                        await this.login(data)
+                        await this.login(data) // login() 是 user 模块的 action
                         this.loginLoading = false
                     }
                 }
