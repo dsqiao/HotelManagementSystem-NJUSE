@@ -24,6 +24,7 @@
 
                         <a-pagination
                             showQuickJumper
+                            disabled
                             :total="hotelList.totalElements"
                             :defaultCurrent="1"
                             @change="pageChange"
