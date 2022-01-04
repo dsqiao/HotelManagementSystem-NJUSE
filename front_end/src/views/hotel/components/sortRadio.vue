@@ -4,6 +4,7 @@
         <a-radio-group
             default-value="default"
             button-style="solid"
+            style="float: left;"
             @change="handleSortChange"
         >
             <a-radio-button class="button" value="default">
@@ -19,6 +20,7 @@
                 按评分排序
             </a-radio-button>
         </a-radio-group>
+        
     </div>
 </template>
 
@@ -44,9 +46,11 @@ export default {
             const type = event.target.value
             const data = this.hotelList
             if (type === 'default') {
+                // window.location.reload()
                 this.sortByDefault({
                     userId: Number(this.userId),
                 })
+                console.log("shit")
             } else if (type === 'evaluatePeople') {
                 this.sortByEvaluatePeople({
                     userId: Number(this.userId),
@@ -61,12 +65,15 @@ export default {
                 })
             }
         },
+        reload(event){
+            window.location.reload()
+        },
     },
 }
 </script>
 <style scoped lang="less">
 .button {
-    margin-left: 15px;
+    margin-left: 30px;
     border-radius: 6px;
 }
 </style>

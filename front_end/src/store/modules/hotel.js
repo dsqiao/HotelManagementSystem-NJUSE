@@ -186,6 +186,7 @@ const hotel = {
             }
         },
         sortByDefault: async ({ state, commit }, data) => {
+            // window.history.go(0)
             const res = await sortByDefaultAPI({
                 bizRegion: state.bizRegion,
                 address: state.address,

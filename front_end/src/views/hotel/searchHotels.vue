@@ -2,35 +2,72 @@
 <template>
     <div class="searchHotels">
         <a-layout>
-            <a-layout-content style="min-width: 800px">
+            <a-layout-content style="min-width: 800px ;">
                 <a-form :form="form">
                     <div class="searchFrame">
-                        <a-form-item v-bind="formItemLayout" label="酒店地址">
+                        <a-form-item class="form-item" v-bind="formItemLayout">
+                            <!-- <div class="label">
+                                <span>地址</span>
+                            </div> -->
+                            
                             <a-input
+                                class="input"
                                 placeholder="地址"
-                                v-decorator="[
+                                v-decorator="[ 
                                     'address',
                                     {
                                         rules: [
                                             {
-                                                required: true,
-                                                message: '请填写地址',
+                                                required: true  ,
+                                                message: '请输入地址',
                                             },
                                         ],
                                     },
                                 ]"
                                 allowClear
                             />
+                            <!-- <span class="label">入住日期</span> -->
+                            <a-date-picker
+                                class="input"
+                                v-model="startValue"
+                                :disabled-date="disabledStartDate"
+                                show-time
+                                format="YYYY-MM-DD 12:00:00"
+                                placeholder="入住日期"
+                                @openChange="handleStartOpenChange"
+                            />
+                            <!-- <span class="label">退房日期</span> -->
+                            <a-date-picker
+                                class="input"
+                                v-model="endValue"
+                                :disabled-date="disabledEndDate"
+                                show-time
+                                format="YYYY-MM-DD 12:00:00"
+                                placeholder="退房日期"
+                                :open="endOpen"
+                                @openChange="handleEndOpenChange"
+                            />
+                            <ordered-check></ordered-check> 
+                            <div class="button" style="textalign= right">
+                                <a-button type="primary" @click="handleSubmits"
+                                    ><a-icon type="search" />
+                                    搜索
+                                </a-button>
+                                <a-button @click="reload" type="default" style="margin-left: 20px;margin-right:-35px;"><a-icon type="reload" />重置</a-button>
+                            </div>
+                            
                         </a-form-item>
-                        <a-form-item v-bind="formItemLayout" label="酒店名称">
+                        <a-form-item class="form-item" v-bind="formItemLayout">
+                            <!-- <span class="label">酒店名称</span> -->
                             <a-input
+                            class="input"
                                 v-decorator="['name']"
                                 placeholder="酒店名称"
                                 allowClear
                             />
-                        </a-form-item>
-                        <a-form-item v-bind="formItemLayout" label="商圈">
+                            <!-- <span class="label">商圈</span> -->
                             <a-input
+                            class="input"
                                 placeholder="商圈"
                                 v-decorator="[
                                     'bizRegion',
@@ -45,20 +82,20 @@
                                 ]"
                                 allowClear
                             />
-                        </a-form-item>
-                        <a-form-item>
-                            <span class="label">最低星级：</span>
+                            <!-- <span class="label">最低星级</span> -->
                             <a-input-number
-                                class="lowStar"
+                                placeholder="最低星级"
+                                class="input"
                                 size="large"
                                 :min="1"
                                 :max="5"
                                 @change="onChange"
                                 v-decorator="['lowStar']"
                             />
-                            <span class="label">最高星级：</span>
+                            <!-- <span class="label">最高星级</span> -->
                             <a-input-number
-                                class="highStar"
+                                placeholder="最高星级"
+                                class="input"
                                 size="large"
                                 :min="1"
                                 :max="5"
@@ -66,18 +103,19 @@
                                 v-decorator="['highStar']"
                             />
                         </a-form-item>
-                        <a-form-item>
-                            <span class="RoomsNum">房间数量：</span>
+                        <a-form-item class="form-item">
+                            <!-- <span class="label">房间数量</span> -->
                             <a-input-number
-                                class="RoomsNumFrame"
+                                placeholder="房间数量"
+                                class="input"
                                 size="large"
                                 :min="1"
                                 :max="5"
                                 @change="onChange"
                                 v-decorator="['num']"
                             />
-                            <span class="RoomsType">房间类型：</span>
-                            <a-select v-decorator="['type']" class="Selection">
+                            <!-- <span class="label">房间类型</span> -->
+                            <a-select v-decorator="['type']" class="input" placeholder="房间类型">
                                 <a-select-option value="1"
                                     >大床房</a-select-option
                                 >
@@ -91,11 +129,11 @@
                                     >总统套房</a-select-option
                                 >
                             </a-select>
-                        </a-form-item>
-                        <a-form-item>
-                            <span class="label">最低价格：</span>
+
+                            <!-- <span class="label">最低价格</span> -->
                             <a-input-number
-                                class="lowPrice"
+                                placeholder="最低价格"
+                                class="input"
                                 size="large"
                                 :min="0"
                                 :max="10000"
@@ -103,9 +141,10 @@
                                 v-decorator="['lowPrice']"
                             />
 
-                            <span class="label">最高价格：</span>
+                            <!-- <span class="label">最高价格</span> -->
                             <a-input-number
-                                class="highPrice"
+                                placeholder="最高价格"
+                                class="input"
                                 size="large"
                                 :min="0"
                                 :max="10000"
@@ -113,35 +152,6 @@
                                 v-decorator="['highPrice']"
                             />
                         </a-form-item>
-                        <a-form-item v-bind="formItemLayout" label="入住日期">
-                            <a-date-picker
-                                v-model="startValue"
-                                :disabled-date="disabledStartDate"
-                                show-time
-                                format="YYYY-MM-DD 12:00:00"
-                                placeholder="入住日期"
-                                @openChange="handleStartOpenChange"
-                            />
-                        </a-form-item>
-                        <a-form-item v-bind="formItemLayout" label="退房日期">
-                            <a-date-picker
-                                v-model="endValue"
-                                :disabled-date="disabledEndDate"
-                                show-time
-                                format="YYYY-MM-DD 12:00:00"
-                                placeholder="退房日期"
-                                :open="endOpen"
-                                @openChange="handleEndOpenChange"
-                            />
-                        </a-form-item>
-                        <div
-                            style="width: 100%; text-align: right; margin:20px 0"
-                        >
-                            <a-button type="primary" @click="handleSubmits"
-                                ><a-icon type="search" />
-                                搜索
-                            </a-button>
-                        </div>
                     </div>
                 </a-form>
             </a-layout-content>
@@ -150,20 +160,21 @@
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import OrderedCheck from './components/orderedCheck.vue'
 const moment = require('moment')
 export default {
     name: 'searchHotels',
-    components: {},
+    components: {OrderedCheck},
     data() {
         return {
             formItemLayout: {
                 labelCol: {
-                    xs: { span: 12 },
-                    sm: { span: 6 },
+                    xs: { span: 1 },
+                    sm: { span: 1 },
                 },
                 wrapperCol: {
                     xs: { span: 24 },
-                    sm: { span: 16 },
+                    sm: { span: 23 },
                 },
             },
             formLayout: 'horizontal',
@@ -264,20 +275,42 @@ export default {
 </script>
 <style scoped lang="less">
 .searchHotels {
-    text-align: center;
-    padding: 50px 0;
+    text-align: left;
+    // padding: 50px 0;
 }
 .searchFrame {
-    width: 400px;
+    width: 1250px;
+    padding-left: 15px;
+    margin-left: 30px;
+    border: 1px solid lightskyblue;border-radius: 8px;
+    margin-bottom: 30px;
 }
 .ant-input-number {
     margin-right: 30px;
 }
-.type {
-    margin-right: 70px;
-}
+
 .Selection {
     width: 100px;
     margin-right: 20px;
+}
+.input{
+    width: 200px;
+    margin-right: 30px;
+    margin-left: 0px;
+}
+.button{
+    float: right;
+    // margin-right: 12px;
+}
+.label{
+    display: inline-block;
+    margin-right:8px;
+    width: 80px;
+    text-align: right;
+
+}
+.form-item{
+    margin-bottom: 7px;
+    margin-top: 4px;
 }
 </style>
