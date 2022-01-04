@@ -1,6 +1,6 @@
 <!--是否预订-->
 <template>
-    <a-checkbox @change="onChange">
+    <a-checkbox class="check" @change="onChange">
         预定过
     </a-checkbox>
 </template>
@@ -23,3 +23,8 @@ export default {
     },
 }
 </script>
+<style scoped lang="less">
+.check{
+    margin-left: 25px;
+}
+</style>

@@ -1,8 +1,9 @@
 <!--酒店列表-->
 <template>
     <div class="hotelList">
-        <Selector id="selector"></Selector>
-        <OrderedCheck id="orderedCheck"></OrderedCheck>
+        <!-- <Selector id="selector"></Selector> -->
+        <!-- <OrderedCheck id="orderedCheck"></OrderedCheck> -->
+        <search-hotels id="searchHotels"></search-hotels>
         <SortRadio id="sortRadio"></SortRadio>
         <a-layout style="margin-top: 20px">
             <a-layout-content style="min-width: 800px">
@@ -39,14 +40,16 @@ import Selector from './components/selector'
 import SortRadio from './components/sortRadio'
 import OrderedCheck from './components/orderedCheck'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import SearchHotels from './searchHotels.vue'
 
 export default {
     name: 'home',
     components: {
         HotelCard,
-        Selector,
+        // Selector,
         SortRadio,
-        OrderedCheck,
+        // OrderedCheck,
+        SearchHotels,
     },
     data() {
         return {
