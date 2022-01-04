@@ -10,7 +10,7 @@
                 />
             </div>
         </a-card>
-        <a-card class="info" title="设施信息">
+        <!-- <a-card class="info" title="设施信息">
             <a-card title="休闲娱乐设施">
                 健身中心（酒店内）<br />
                 SPA 设施 <br />
@@ -24,7 +24,7 @@
                 距地铁站直线距离400米 <br />
                 含有收费停车场，每小时 RMB 8元
             </a-card>
-        </a-card>
+        </a-card> -->
         <a-card class="info" title="入住须知">
             <a-card title="餐食政策" :style="{ marginTop: '16px' }">
                 酒店提供自助早餐，价格 RMB 60元/人

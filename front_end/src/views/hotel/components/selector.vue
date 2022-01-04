@@ -26,7 +26,7 @@
 
 <script>
 const addresses = ['全部', '南京', '北京', '上海']
-const bizRegions = ['全部', 'XiDan', 'XinJieKou', 'WanDa']
+const bizRegions = ['全部', '西单', '新街口', '万达']
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
     name: 'Selector',
