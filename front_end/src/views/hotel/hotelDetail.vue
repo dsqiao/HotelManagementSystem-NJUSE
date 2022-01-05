@@ -28,7 +28,7 @@
                 </span>
                 <span class="value" v-if="currentHotelInfo.bizRegion">
                   {{ currentHotelInfo.bizRegion }}</span
-                >
+                >baidu
               </div>
             </div>
             <div class="info-detail">

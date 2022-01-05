@@ -4,7 +4,7 @@
     <a-layout>
       <a-layout-content style="min-width: 800px">
         <a-form :form="form">
-          <div class="searchFrame">
+          <div class="searchFrame ant-col-xs-23 ant-col-lg-23 ant-col-xxl-23">
             <a-form-item class="form-item" v-bind="formItemLayout">
               <!-- <div class="label">
                                 <span>地址</span>
@@ -276,7 +276,7 @@ export default {
   // padding: 50px 0;
 }
 .searchFrame {
-  width: 1250px;
+  // width: 1250px;
   padding-left: 15px;
   margin-left: 30px;
   border: 1px solid lightskyblue;
