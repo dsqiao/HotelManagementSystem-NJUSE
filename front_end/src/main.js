@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Antd from 'ant-design-vue'
+import BaiduMap from 'vue-baidu-map'
 import 'ant-design-vue/dist/antd.css'
 import store from './store'
 
@@ -13,7 +14,9 @@ const options = {
     storage: 'local',
 }
 Vue.use(Antd)
-
+Vue.use(BaiduMap, {
+    ak: 'ec69tBenv1WYKACGfHjguGlpKin6bOfI',
+})
 Vue.directive('title', {
     inserted: function(el, binding) {
         document.title = el.dataset.title
