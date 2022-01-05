@@ -47,7 +47,7 @@
                 </router-link>
             </a-menu-item>
 
-            <a-menu-item
+            <!-- <a-menu-item
                 key="5"
                 @click="selectMenu"
                 v-if="userInfo.userType === 'Client'"
@@ -55,9 +55,9 @@
                 <router-link to="/hotel/searchHotels">
                     <a-icon type="search" />搜索酒店
                 </router-link>
-            </a-menu-item>
+            </a-menu-item> -->
             <a-menu-item
-                key="6"
+                key="5"
                 @click="selectMenu"
                 v-if="userInfo.userType === 'Salesman'"
             >

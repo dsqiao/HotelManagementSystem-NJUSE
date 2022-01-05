@@ -25,6 +25,6 @@ export default {
 </script>
 <style scoped lang="less">
 .check{
-    margin-left:20px;
+    margin-left:1px;
 }
 </style>
